@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="376dp"
+        android:background="@color/themeColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="20dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/settings"
+        android:textColor="@color/white"
+        android:textFontWeight="600"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="104dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ava2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/NameId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:fontFamily="@font/opens_sans"
+        android:textColor="@android:color/white"
+        android:textFontWeight="600"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/occupationId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/career"
+        android:textColor="#B2B2B3"
+        android:textFontWeight="600"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="305dp"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/adress"
+        android:textColor="#B2B2B3"
+        android:textFontWeight="600"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/facebookId"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="438dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_elipse"
+        android:contentDescription="@string/facebookbutton"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintEnd_toStartOf="@+id/inId"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/inId"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="438dp"
+        android:background="@drawable/ic_elipse"
+        android:contentDescription="@string/inbutton"
+        android:src="@drawable/ic_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="438dp"
+        android:background="@drawable/ic_elipse"
+        android:contentDescription="@string/instagrambutton"
+        android:src="@drawable/ic_instagram"
+        app:layout_constraintStart_toEndOf="@id/inId"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="593dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_border"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/edit_profile"
+        android:textColor="#18181F"
+        android:textFontWeight="600"
+        android:textSize="14sp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="649dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/view_my_contacts"
+        android:textColor="@color/white"
+        android:textFontWeight="600"
+        android:textSize="16sp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

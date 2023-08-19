@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="let_s_get_acquainted">Авторизуйтесь</string>
+    <string name="fill_out_the_profile_and_go_to_the_application">Заповнюйте профіль і переходьте до додатку!</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запам\'ятати мене</string>
+    <string name="register">РЕЄСТРАЦІЯ</string>
+    <string name="settings">налаштування</string>
+    <string name="adress">Домашня адреса</string>
+    <string name="career">Професія</string>
+    <string name="facebookbutton">фейзбук</string>
+    <string name="inbutton">ін</string>
+    <string name="instagrambutton">інстаграм</string>
+    <string name="edit_profile">Редагувати профіль</string>
+    <string name="view_my_contacts">ПЕРЕГЛЯНУТИ МОЇ КОНТАКТИ</string>
+    <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">Нажимаючи зареєструватись ви погоджуєтесь з нашими умовами</string>
+    <string name="already_have_an_account">Вже маєте аккаунт?</string>
+    <string name="sign_in">Вхід</string>
+    <string name="email_input">Email</string>
+    <string name="password_input">Пароль</string>
+</resources>
