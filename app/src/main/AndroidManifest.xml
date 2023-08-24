@@ -15,6 +15,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <!-- todo: non-first activity must be false-->
         <activity
             android:name=".AuthActivity"
             android:exported="true">

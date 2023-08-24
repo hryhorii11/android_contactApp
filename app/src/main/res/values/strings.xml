@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
+
+    <!-- Core -->
+    <string name="app_name" translatable="false">My Application</string>
+
+    <!-- Auth -->
     <string name="let_s_get_acquainted">Let`s get acquainted</string>
     <string name="fill_out_the_profile_and_go_to_the_application">Fill out the profile and go to the application!</string>
     <string name="email">Email</string>
@@ -7,6 +11,10 @@
     <string name="remember_me">Remember me</string>
     <string name="register">REGISTER</string>
     <string name="settings">settings</string>
+    <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">By clicking Register you agree to our Terms and Conditions</string>
+
+
+    <!-- Profile -->
     <string name="adress">Home adress</string>
     <string name="career">Career</string>
     <string name="facebookbutton">facebookButton</string>
@@ -14,9 +22,11 @@
     <string name="instagrambutton">instagramButton</string>
     <string name="edit_profile">Edit profile</string>
     <string name="view_my_contacts">VIEW MY CONTACTS</string>
-    <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">By clicking Register you agree to our Terms and Conditions</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
-    <string name="email_input">Email</string>
+    <string name="email_input" translatable="false">Email</string>
     <string name="password_input">Password</string>
+    <string name="passwordLenghtErrorText">password must be at least %d characters long</string>
+
+
 </resources>
