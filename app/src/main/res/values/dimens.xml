@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="viewTopHeight">117dp</dimen>
+    <dimen name="buttonBackSize">24dp</dimen>
+    <dimen name="horizontalMargin">16dp</dimen>
+    <dimen name="buttonBackTopMargin">13.5dp</dimen>
+    <dimen name="buttonSearchSize">16dp</dimen>
+    <dimen name="buttonSearchTopMargin">17.5dp</dimen>
+    <dimen name="superBigTextSize">24sp</dimen>
+    <dimen name="textViewContactTopMargin">10dp</dimen>
+    <dimen name="mediumTextSize">14sp</dimen>
+    <dimen name="buttonAddTopMargin">73dp</dimen>
+    <dimen name="buttonAddHeight">18.2dp</dimen>
+    <dimen name="recyclerTopMargin">133dp</dimen>
+    <dimen name="cardViewContactHeight">66dp</dimen>
+    <dimen name="cardViewContactBottomMargin">16dp</dimen>
+    <dimen name="cardViewContactCornerRadius">6dp</dimen>
+    <dimen name="biggerTextSize">18sp</dimen>
+    <dimen name="imageViewContactStartMargin">8dp</dimen>
+    <dimen name="imageViewContactTopMargin">8dp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
+    <dimen name="buttonBactaddContactTopMargin">20dp</dimen>
+    <dimen name="textViewAddContactTopMargin">20dp</dimen>
+    <dimen name="contactPhotoTopMargin">28dp</dimen>
+    <dimen name="throughItemBIgMargin">24dp</dimen>
+    <dimen name="standardPadding">8dp</dimen>
+    <dimen name="bigTextSize">16sp</dimen>
+    <dimen name="throughItemMediumMargin">16dp</dimen>
+    <dimen name="scrollViewBottomMargin">36dp</dimen>
+    <dimen name="buttonAddPhotoSize">55dp</dimen>
+</resources>

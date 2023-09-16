@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">level2</string>
+    <string name="contacts">Contacts</string>
+    <string name="add_contacts">Add contacts</string>
+    <string name="name_name">Name Name</string>
+    <string name="career">Career</string>
+    <string name="contact_has_been_removed">Contact has been removed</string>
+    <string name="add_contact">Add contact</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="address">Adress</string>
+    <string name="remove_contact">Contact has been removed</string>
+    <string name="save">Save</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="firstname_lastname">FirstName LastName</string>
+    <string name="careerHint">Career</string>
+    <string name="name_gmail_com">name@gmail.com</string>
+    <string name="number_example">(068)-644-21-04</string>
+    <string name="address_example">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
+    <string name="date_birth_example">11/02/2003</string>
+    <string name="invalid_username_there_must_be_a_first_and_last_name">invalid username, there must be a first and last name</string>
+    <string name="cannot_be_blank">cannot be blank</string>
+    <string name="must_be_10_numbers">must be 10 numbers</string>
+    <string name="invalid_email">invalid email</string>
+    <string name="incorrect_date">incorrect date</string>
+    <string name="fill_in_all_fields_correctly">fill in all fields correctly</string>
+
+</resources>
