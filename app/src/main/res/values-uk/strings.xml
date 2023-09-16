@@ -18,5 +18,11 @@
     <string name="already_have_an_account">Вже маєте аккаунт?</string>
     <string name="sign_in">Вхід</string>
     <string name="password_input">Пароль</string>
-    <string name="passwordLenghtErrorText">password must be at least %d characters long</string>
+    <string name="passwordLenghtErrorText">Пароль повинен мати мінмум 8 символів</string>
+    <string name="log_out">Вихід</string>
+    <string name="name_name">Ім\'я Прізвище</string>
+    <string name="invalid_email">Некоректний емайл</string>
+    <string name="or">або</string>
+    <string name="google">Google</string>
+
 </resources>

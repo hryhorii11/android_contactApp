@@ -8,7 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 
 class MainActivity : AppCompatActivity() {
-
+    private val emailSeparator="@"
+    private val nameSeparatorsPattern= "[.,_]"
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,22 +17,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //todo decompose
-        binding.NameId.text = parseEmail(intent.getStringExtra("email"))  //todo ket -> const
+        binding.textViewName.text = parseEmail(intent.getStringExtra(emailKey))
 
         //todo decompose
-        Glide.with(binding.imageView)
+        Glide.with(binding.imageViewUserPhoto)
             .load(R.drawable.ava2)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
-            .into(binding.imageView)
+            .into(binding.imageViewUserPhoto)
     }
 
     private fun parseEmail(email: String?): String? {
         val name = email?.substring(
             0,
-            email.indexOf('@')  //todo const
+            email.indexOf(emailSeparator)
         )
         return name?.replace(
-            "[.,_]".toRegex(),  //todo const
+            nameSeparatorsPattern.toRegex(), 
             " "
         )
     }

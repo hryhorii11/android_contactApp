@@ -7,4 +7,6 @@
     <color name="orangeButtonColor">#FB5E06</color>
     <color name="trasnparentColor">#00FFFFFF</color>
     <color name="greyBorderColor">#BDBDBD</color>
+    <color name="greyText2">#B2B2B3</color>
+    <color name="greyText">#18181F</color>
 </resources>

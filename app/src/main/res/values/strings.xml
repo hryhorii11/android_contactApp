@@ -12,10 +12,10 @@
     <string name="register">REGISTER</string>
     <string name="settings">settings</string>
     <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">By clicking Register you agree to our Terms and Conditions</string>
-
+    <style name="invalidEmail">Invalid email</style>
 
     <!-- Profile -->
-    <string name="adress">Home adress</string>
+    <string name="adress">Home address</string>
     <string name="career">Career</string>
     <string name="facebookbutton">facebookButton</string>
     <string name="inbutton">inButton</string>
@@ -27,6 +27,11 @@
     <string name="email_input" translatable="false">Email</string>
     <string name="password_input">Password</string>
     <string name="passwordLenghtErrorText">password must be at least %d characters long</string>
+    <string name="log_out">Log Out</string>
+    <string name="name_name">name</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="or">or</string>
+    <string name="google">Google</string>
 
 
 </resources>

@@ -1,20 +1,19 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
-import android.content.Context
+
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.doOnTextChanged
 import com.example.myapplication.databinding.ActivityAuthBinding
-
+val emailKey = "email"
+val passwordKey = "password"
 class AuthActivity : AppCompatActivity() {
 
-
+    private val intentEmailKey = "email"
+    private val passwordLength = 8
     private val binding: ActivityAuthBinding by lazy {
         ActivityAuthBinding.inflate(layoutInflater)
     }
@@ -30,73 +29,72 @@ class AuthActivity : AppCompatActivity() {
         setFieldsValidations()
     }
 
-    private fun loadData()
-    {
-        binding.emailEditText.setText(preferences.getString("email",""))    //todo key -> const
-        binding.passwordEditText.setText(preferences.getString("password",""))  //todo key -> const
+    private fun loadData() {
+        binding.edittextEmail.setText(preferences.getString(emailKey, ""))
+        binding.edittextPassword.setText(preferences.getString(passwordKey, ""))
 
     }
 
-
     private fun setListeners() {
-        binding.registerButton.setOnClickListener { register() }
+        binding.buttonRegister.setOnClickListener { register() }
     }
 
     private fun setFieldsValidations() {
-        binding.emailEditText.doOnTextChanged { text, _, _, _ ->
+        binding.edittextEmail.doOnTextChanged { text, _, _, _ ->
             if (!isValidEmail(text.toString())) {
-                binding.emailContainer.error = "invalid email"  //todo to resources!
+                binding.textInputLayoutEmail.error = getString(R.string.invalid_email)
             } else {
-                binding.emailContainer.error = null
+                binding.textInputLayoutEmail.error = null
             }
         }
-        binding.passwordEditText.doOnTextChanged { text, _, _, _ ->
-            if (text.toString().length < 8 ) {   //todo 8 -> const  && decompose pass valid
-                binding.passwordContainer.error = getString(R.string.passwordLenghtErrorText, 8)  //todo to resources!
+        binding.edittextPassword.doOnTextChanged { text, _, _, _ ->
+            if (isValidPassword(text.toString())) {
+                binding.textInputLayoutPassword.error =
+                    getString(R.string.passwordLenghtErrorText)
             } else {
-                binding.passwordContainer.error = null
+                binding.textInputLayoutPassword.error = null
             }
         }
     }
 
-
-
-
     private fun register() {
-         if(binding.rememberId.isChecked) saveDataToSP()
-         if(checkData()) {
-             val intent = Intent(this, MainActivity::class.java)    //todo decompose
-             intent.putExtra("email", binding.emailEditText.text.toString())    //todo key -> const
-             startActivity(intent)
-             //todo finish?
-             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-         }
+        if (binding.checkBoxRemember.isChecked) saveDataToSP()
+        if (checkData()) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(intentEmailKey, binding.edittextEmail.text.toString())
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
     }
 
     private fun saveDataToSP() {
         preferences.edit().putString(
-            "password",
-            binding.passwordEditText.text.toString()
-        )   //todo key -> const
+            passwordKey,
+            binding.edittextPassword.text.toString()
+        )
             .putString(
-                "email",
-                binding.emailEditText.text.toString()
-            ) //todo key -> const
+                emailKey,
+                binding.edittextEmail.text.toString()
+            )
             .apply()
     }
 
     private fun checkData(): Boolean {
-      return binding.passwordEditText.text.toString().length>=8 && isValidEmail(binding.emailEditText.text.toString())  //todo 8 -> const
+        return isValidPassword(binding.edittextEmail.text.toString()) && isValidEmail(binding.edittextEmail.text.toString())
     }
 
+    private fun isValidPassword(password: String): Boolean {
+        return password.length >= passwordLength
+    }
 
     private fun isValidEmail(email: String): Boolean {
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"   //todo pattern -> const && read about Patterns.EMAIL_ADDRESS
+        val emailPattern =
+            Patterns.EMAIL_ADDRESS
         return email.matches(emailPattern.toRegex())
     }
 
-
     companion object {
-       private const val APP_PREFERENCES = "APP_PREFERENCES"
+        private const val APP_PREFERENCES = "APP_PREFERENCES"
     }
 }
