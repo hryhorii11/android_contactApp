@@ -28,4 +28,12 @@
     <dimen name="throughItemMediumMargin">16dp</dimen>
     <dimen name="scrollViewBottomMargin">36dp</dimen>
     <dimen name="buttonAddPhotoSize">55dp</dimen>
+    <dimen name="contactImageSize">113dp</dimen>
+    <dimen name="contactImageTopMargin">71dp</dimen>
+    <dimen name="throughElementsSmallManager">8dp</dimen>
+    <dimen name="socialNetworkImageSize">60dp</dimen>
+    <dimen name="socialNetworkTopMargin">62dp</dimen>
+    <dimen name="socialNetworkMargin">32dp</dimen>
+    <dimen name="buttonMessageTopMargin">273dp</dimen>
+    <dimen name="textViewProfileTopMargin">20dp</dimen>
 </resources>

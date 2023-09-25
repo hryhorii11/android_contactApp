@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.example.level2.R
-import com.example.level2.UsersViewModel
+import com.example.level2.screens.ContactListViewModel
 import com.example.level2.databinding.ActivityAddContactBinding
 import com.example.level2.ext.setPhoto
 import com.example.level2.model.Contact
@@ -24,7 +24,7 @@ import java.util.Locale
 const val usernameValidationPattern = "[a-zA-zа-яА-Я]{2,} +[a-zA-zА-Яа-я]{2,}"
 const val phoneNumbers = 10
 
-class AddContactDialogFragment(private val viewModel: UsersViewModel) : DialogFragment() {
+class AddContactDialogFragment(private val viewModel: ContactListViewModel) : DialogFragment() {
 
     private lateinit var addContactBinding: ActivityAddContactBinding
     private var imageUri: Uri? = null
@@ -78,6 +78,7 @@ class AddContactDialogFragment(private val viewModel: UsersViewModel) : DialogFr
                 0,
                 addContactBinding.edittextUsername.text.toString(),
                 addContactBinding.edittextCareer.text.toString(),
+                addContactBinding.edittextAdress.text.toString(),
                 imageUri.toString()
             )
             viewModel.addContact(user)

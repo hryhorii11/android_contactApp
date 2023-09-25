@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/contactListFragment">
+
+    <fragment
+        android:id="@+id/contactListFragment"
+        android:name="com.example.level2.screens.ContactListFragment"
+        android:label="ContactListFragment"
+        tools:layout="@layout/fragment_contact_list">
+        <action
+            android:id="@+id/action_contactListFragment_to_detailViewFragment"
+            app:destination="@id/detailViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailViewFragment"
+        android:name="com.example.level2.screens.DetailViewFragment"
+        android:label="DetailViewFragment"
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailViewFragment_to_contactListFragment"
+            app:destination="@id/contactListFragment" />
+        <argument
+            android:name="contact_name"
+            android:defaultValue="name"
+            app:argType="string" />
+        <argument
+            android:name="career"
+            app:argType="string"
+            android:defaultValue="career" />
+        <argument
+            android:name="addres"
+            app:argType="string"
+            android:defaultValue="addres" />
+        <argument
+            android:name="photo"
+            app:argType="string" />
+
+    </fragment>
+</navigation>

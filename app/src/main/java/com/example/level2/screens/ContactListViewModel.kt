@@ -1,11 +1,11 @@
-package com.example.level2
+package com.example.level2.screens
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.level2.model.Contact
 
-class UsersViewModel
+class ContactListViewModel
     :ViewModel() {
     private var contactToReturn: Contact? =null
     private var contactToReturnPosition:Int?=null

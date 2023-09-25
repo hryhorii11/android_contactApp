@@ -2,8 +2,7 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.level2.App
-import com.example.level2.UsersViewModel
-import com.example.level2.model.Contact
+import com.example.level2.screens.ContactListViewModel
 
 class ViewModelFactory(
     private val app: App
@@ -12,8 +11,8 @@ class ViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val viewModel = when (modelClass) {
-            UsersViewModel::class.java -> {
-                UsersViewModel()
+            ContactListViewModel::class.java -> {
+                ContactListViewModel()
             }
             else -> {
                 throw IllegalStateException("Unknown view model class")
