@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/cardViewContactHeight"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
@@ -21,7 +21,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/item_border">
+            android:background="@drawable/item_border"
+
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageViewContactPhoto"

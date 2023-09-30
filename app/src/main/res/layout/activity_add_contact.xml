@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- TODO: big values to dimens -->
+
     <View
         android:id="@+id/ViewAddContactTop"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="212dp"
         android:background="@color/themeColor"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/backButton"
@@ -66,8 +69,8 @@
         android:layout_marginBottom="@dimen/scrollViewBottomMargin"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/buttonSave"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ViewAddContactTop">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -91,11 +94,11 @@
                     android:id="@+id/edittext_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:hint="@string/firstname_lastname"
-                    android:textColorHint="@color/grey_text_2"
+                    android:inputType="textEmailAddress"
                     android:lines="1"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,11 +118,11 @@
                     android:id="@+id/edittext_career"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:hint="@string/careerHint"
-                    android:textColorHint="@color/grey_text_2"
+                    android:inputType="textEmailAddress"
                     android:lines="1"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,17 +137,17 @@
                 android:layout_marginEnd="@dimen/horizontalMargin"
                 android:hint="@string/email"
                 app:errorEnabled="true"
-                app:expandedHintEnabled="false"
-                >
+                app:expandedHintEnabled="false">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/name_gmail_com"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:hint="@string/name_gmail_com"
-                    android:textColorHint="@color/grey_text_2"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,17 +161,17 @@
                 android:layout_marginEnd="@dimen/horizontalMargin"
                 android:hint="@string/phone"
                 app:errorEnabled="true"
-                app:expandedHintEnabled="false"
-                >
+                app:expandedHintEnabled="false">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/number_example"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:hint="@string/number_example"
-                    android:textColorHint="@color/grey_text_2"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,18 +185,17 @@
                 android:layout_marginEnd="@dimen/horizontalMargin"
                 android:hint="@string/address"
                 app:errorEnabled="true"
-                app:expandedHintEnabled="false"
-                >
+                app:expandedHintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_adress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:hint="@string/address_example"
-                    android:textColorHint="@color/grey_text_2"
+                    android:inputType="textEmailAddress"
                     android:lines="1"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,18 +209,17 @@
                 android:layout_marginEnd="@dimen/horizontalMargin"
                 android:hint="@string/date_of_birth"
                 app:errorEnabled="true"
-                app:expandedHintEnabled="false"
-                >
+                app:expandedHintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_date_of_birth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/date_birth_example"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:hint="@string/date_birth_example"
-                    android:textColorHint="@color/grey_text_2"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey_text_2"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -231,7 +232,7 @@
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginBottom="@dimen/throughItemMediumMargin"
-        android:background="@drawable/button_save_background"
+        android:background="@drawable/bg_button_save"
         android:paddingTop="@dimen/standardPadding"
         android:paddingBottom="@dimen/standardPadding"
         android:text="@string/save"

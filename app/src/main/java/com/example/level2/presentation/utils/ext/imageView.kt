@@ -1,11 +1,11 @@
-package com.example.level2.ext
+package com.example.level2.presentation.utils.ext
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.level2.R
 
-fun ImageView.setPhoto(photo:String=R.drawable.baseline_person_24.toString())
-{
+// TODO: name of file
+fun ImageView.setPhoto(photo: String = R.drawable.baseline_person_24.toString()) {
     Glide.with(this)
         .load(photo)
         .circleCrop()

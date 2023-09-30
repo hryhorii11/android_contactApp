@@ -2,8 +2,7 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.level2.App
-import com.example.level2.UsersViewModel
-import com.example.level2.model.Contact
+import com.example.level2.presentation.ui.activities.contacts.UsersViewModel
 
 class ViewModelFactory(
     private val app: App

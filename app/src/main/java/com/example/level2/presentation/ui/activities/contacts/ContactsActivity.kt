@@ -1,4 +1,4 @@
-package com.example.level2
+package com.example.level2.presentation.ui.activities.contacts
 
 
 import android.Manifest
@@ -15,20 +15,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.level2.presentation.ui.activities.contacts.adapter.ContactAdapter
+import com.example.level2.presentation.ui.activities.contacts.intrefaces.ItemClickListener
+import com.example.level2.R
 import com.example.level2.databinding.ActivityContactsBinding
-import com.example.level2.fragments.AddContactDialogFragment
-import com.example.level2.model.Contact
+import com.example.level2.presentation.ui.fragments.addcontactdialog.AddContactDialogFragment
+import com.example.level2.data.model.Contact
 import com.google.android.material.snackbar.Snackbar
 import factory
 
 
-interface ItemClickListener {
-    fun onUserDelete(contact: Contact)
-}
-
-class ContactsActivity : AppCompatActivity(), ItemClickListener {
+class ContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding
-    private lateinit var adapter: ContactAdapter
+    private val adapter: ContactAdapter = ContactAdapter(object : ItemClickListener {
+        override fun onUserDelete(contact: Contact) {
+            viewModel.deleteContact(contact)
+            showSnackBar()
+        }
+    })
     private lateinit var viewModel: UsersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,30 +40,40 @@ class ContactsActivity : AppCompatActivity(), ItemClickListener {
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, factory())[UsersViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, factory())[UsersViewModel::class.java] // TODO: by delegate
         viewModel.setUsers(getContactsFromPhone())
 
         setListeners()
+        setRecyclerView()
 
-        adapter = ContactAdapter(this)
-        binding.recycler.layoutManager = LinearLayoutManager(this)
-        binding.recycler.adapter = adapter
 
         setTouchHelper()
+        setObserver()
 
+    }
+
+    private fun setObserver() {
         viewModel.contacts.observe(this) {
             adapter.submitList(it)
         }
     }
 
+    private fun setRecyclerView() {
+        with(binding.recycler) {
+            layoutManager = LinearLayoutManager(this@ContactsActivity)
+            adapter = this@ContactsActivity.adapter
+        }
+    }
+
     private fun setTouchHelper() {
-        val callback=object:SwipeToDeleteCallback()
-        {
+        val callback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onUserDelete(adapter.currentList[viewHolder.bindingAdapterPosition])
+                viewModel.deleteContact(adapter.currentList[viewHolder.bindingAdapterPosition])
+                showSnackBar()
             }
         }
-        val itemTouchHelper=ItemTouchHelper(callback)
+        val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(binding.recycler)
     }
 
@@ -69,24 +83,17 @@ class ContactsActivity : AppCompatActivity(), ItemClickListener {
 
     private fun showAddContactDialog() {
         val dialog = AddContactDialogFragment(viewModel)
-        dialog.show(supportFragmentManager, "AddContactDialog")
+        dialog.show(supportFragmentManager, "AddContactDialog") // TODO: to constants
     }
 
-    override fun onUserDelete(contact:Contact) {
-        viewModel.deleteContact(contact)
-        showSnackBar()
-
-    }
     private fun showSnackBar() {
-        val snackBar =
-            Snackbar.make(
-                binding.root,
-                getString(R.string.remove_contact), Snackbar.LENGTH_LONG
-            )
-        snackBar.setAction("cancel") {
+        // TODO: you can do this without variable
+        Snackbar.make(
+            binding.root,
+            getString(R.string.remove_contact), Snackbar.LENGTH_LONG
+        ).setAction("cancel") {
             viewModel.returnContact()
-        }
-        snackBar.show()
+        }.show()
     }
 
     @SuppressLint("Range")
@@ -109,19 +116,18 @@ class ContactsActivity : AppCompatActivity(), ItemClickListener {
         )
         cursor?.let {
             while (it.moveToNext()) {
-                val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
                 val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                 contactsList.add(
                     Contact(
-                        id.toInt(),
                         name,
                         "career",
-                        R.drawable.baseline_person_24.toString()
+                        ""
                     )
                 )
             }
             it.close()
         }
+
         return contactsList
     }
 
