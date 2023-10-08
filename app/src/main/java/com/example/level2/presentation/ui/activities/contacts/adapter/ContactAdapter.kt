@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.presentation.ui.activities.contacts.adapter.utils.ItemCallback
 import com.example.level2.presentation.ui.activities.contacts.intrefaces.ItemClickListener
-import com.example.level2.databinding.UserItemBinding
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
+import com.example.level2.databinding.UserItemBinding
 
 
 class ContactAdapter(private val itemClickListener: ItemClickListener)
@@ -17,7 +17,6 @@ class ContactAdapter(private val itemClickListener: ItemClickListener)
     inner class ContactHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
            with(binding) {
-               root.tag = contact // TODO: why?
                buttonDeleteUser.tag = contact
                textViewContactName.text = contact.name
                textViewContactCareer.text = contact.career
