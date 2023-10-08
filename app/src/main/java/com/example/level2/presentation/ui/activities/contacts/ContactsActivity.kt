@@ -8,21 +8,22 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.level2.R
+import com.example.level2.data.LocalUsers
+import com.example.level2.data.model.Contact
+import com.example.level2.databinding.ActivityContactsBinding
 import com.example.level2.presentation.ui.activities.contacts.adapter.ContactAdapter
 import com.example.level2.presentation.ui.activities.contacts.intrefaces.ItemClickListener
-import com.example.level2.R
-import com.example.level2.databinding.ActivityContactsBinding
 import com.example.level2.presentation.ui.fragments.addcontactdialog.AddContactDialogFragment
-import com.example.level2.data.model.Contact
+import com.example.level2.presentation.utils.Constants.ADD_CONTACT_TAG
 import com.google.android.material.snackbar.Snackbar
-import factory
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -33,20 +34,17 @@ class ContactsActivity : AppCompatActivity() {
             showSnackBar()
         }
     })
-    private lateinit var viewModel: UsersViewModel
+    private var contactsList = mutableListOf<Contact>()
+    private val viewModel: UsersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel =
-            ViewModelProvider(this, factory())[UsersViewModel::class.java] // TODO: by delegate
-        viewModel.setUsers(getContactsFromPhone())
-
+        getContactsFromPhone()
+        viewModel.setUsers(contactsList)
         setListeners()
         setRecyclerView()
-
 
         setTouchHelper()
         setObserver()
@@ -69,7 +67,7 @@ class ContactsActivity : AppCompatActivity() {
     private fun setTouchHelper() {
         val callback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                viewModel.deleteContact(adapter.currentList[viewHolder.bindingAdapterPosition])
+                viewModel.deleteContact(adapter.currentList[viewHolder.adapterPosition])
                 showSnackBar()
             }
         }
@@ -83,11 +81,10 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun showAddContactDialog() {
         val dialog = AddContactDialogFragment(viewModel)
-        dialog.show(supportFragmentManager, "AddContactDialog") // TODO: to constants
+        dialog.show(supportFragmentManager, ADD_CONTACT_TAG)
     }
 
     private fun showSnackBar() {
-        // TODO: you can do this without variable
         Snackbar.make(
             binding.root,
             getString(R.string.remove_contact), Snackbar.LENGTH_LONG
@@ -96,16 +93,26 @@ class ContactsActivity : AppCompatActivity() {
         }.show()
     }
 
-    @SuppressLint("Range")
-    fun getContactsFromPhone(): List<Contact> {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), 0)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 123) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                readContact()
+                viewModel.setUsers(contactsList)
+            } else {
+                contactsList = LocalUsers().getUsers().toMutableList()
+            }
         }
-        val contactsList = mutableListOf<Contact>()
+    }
+
+
+    @SuppressLint("Range")
+    private fun readContact() {
         val contentResolver: ContentResolver = this.contentResolver
         val cursor: Cursor? = contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
@@ -127,8 +134,19 @@ class ContactsActivity : AppCompatActivity() {
             }
             it.close()
         }
+    }
 
-        return contactsList
+    private fun getContactsFromPhone() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            readContact()
+            viewModel.setUsers(contactsList)
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), 123)
+        }
     }
 
 }
