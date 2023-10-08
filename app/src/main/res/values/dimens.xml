@@ -28,4 +28,7 @@
     <dimen name="throughItemMediumMargin">16dp</dimen>
     <dimen name="scrollViewBottomMargin">36dp</dimen>
     <dimen name="buttonAddPhotoSize">55dp</dimen>
+    <dimen name="ViewAddContactTopHeight">212dp</dimen>
+    <dimen name="textviewAddContactHeight">23dp</dimen>
+    <dimen name="ImageViewAddContactPhotoSize">113dp</dimen>
 </resources>

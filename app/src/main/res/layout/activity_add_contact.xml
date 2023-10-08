@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO: big values to dimens -->
+
 
     <View
         android:id="@+id/ViewAddContactTop"
@@ -31,7 +31,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textviewAddContact"
         android:layout_width="wrap_content"
-        android:layout_height="23dp"
+        android:layout_height="@dimen/textviewAddContactHeight"
         android:layout_marginTop="@dimen/textViewAddContactTopMargin"
         android:fontFamily="@font/opens_sans"
         android:text="@string/add_contact"
@@ -44,8 +44,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ImageViewAddContactPhoto"
-        android:layout_width="113dp"
-        android:layout_height="113dp"
+        android:layout_width="@dimen/ImageViewAddContactPhotoSize"
+        android:layout_height="@dimen/ImageViewAddContactPhotoSize"
         android:layout_marginTop="@dimen/contactPhotoTopMargin"
         android:src="@drawable/baseline_person_24"
         app:layout_constraintEnd_toEndOf="parent"

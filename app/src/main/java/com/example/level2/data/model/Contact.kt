@@ -2,7 +2,7 @@ package com.example.level2.data.model
 
 import java.util.UUID
 
-data class Contact( // TODO: can set default values
+data class Contact(
     val name: String,
     val career: String,
     val photo: String,

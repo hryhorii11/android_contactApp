@@ -23,6 +23,7 @@ import com.example.level2.presentation.ui.activities.contacts.adapter.ContactAda
 import com.example.level2.presentation.ui.activities.contacts.intrefaces.ItemClickListener
 import com.example.level2.presentation.ui.fragments.addcontactdialog.AddContactDialogFragment
 import com.example.level2.presentation.utils.Constants.ADD_CONTACT_TAG
+import com.example.level2.presentation.utils.Constants.CONTACTS_REQUEST_CODE
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -99,7 +100,7 @@ class ContactsActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 123) {
+        if (requestCode == CONTACTS_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 readContact()
@@ -145,7 +146,7 @@ class ContactsActivity : AppCompatActivity() {
             readContact()
             viewModel.setUsers(contactsList)
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), 123)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), CONTACTS_REQUEST_CODE)
         }
     }
 
