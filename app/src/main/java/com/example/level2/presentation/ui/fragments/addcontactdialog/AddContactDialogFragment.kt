@@ -13,16 +13,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.example.level2.R
 import com.example.level2.presentation.ui.activities.contacts.UsersViewModel
-import com.example.level2.databinding.ActivityAddContactBinding
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
+import com.example.level2.databinding.ActivityAddContactBinding
 import com.example.level2.presentation.utils.Validation.isCareerValid
 import com.example.level2.presentation.utils.Validation.isEmailValid
 import com.example.level2.presentation.utils.Validation.isPhoneValid
 import com.example.level2.presentation.utils.Validation.isUsernameValid
 import com.example.level2.presentation.utils.Validation.isValidDate
 
-// TODO: to constants
 
 class AddContactDialogFragment(private val viewModel: UsersViewModel) : DialogFragment() {
 
@@ -52,10 +51,12 @@ class AddContactDialogFragment(private val viewModel: UsersViewModel) : DialogFr
         }
     }
 
-    private fun setListeners() { // TODO: with
-        binding.backButton.setOnClickListener { close() }
-        binding.buttonSave.setOnClickListener { addUser() }
-        binding.buttonAddPhoto.setOnClickListener { addPhoto() }
+    private fun setListeners() {
+        with(binding) {
+            backButton.setOnClickListener { close() }
+            buttonSave.setOnClickListener { addUser() }
+            buttonAddPhoto.setOnClickListener { addPhoto() }
+        }
     }
 
     private fun addPhoto() {
@@ -133,7 +134,7 @@ class AddContactDialogFragment(private val viewModel: UsersViewModel) : DialogFr
         }
     }
 
-    // TODO: to another place
+
 
 
 }
