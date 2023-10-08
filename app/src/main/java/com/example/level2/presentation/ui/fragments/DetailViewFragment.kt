@@ -1,4 +1,4 @@
-package com.example.level2.screens
+package com.example.level2.presentation.ui.fragments
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.level2.databinding.FragmentDetailBinding
-import com.example.level2.ext.setPhoto
+import com.example.level2.presentation.utils.ext.setPhoto
 
 class DetailViewFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding

@@ -1,5 +1,6 @@
-package com.example.level2.screens
+package com.example.level2.presentation.ui.fragments
 
+import AddContactDialogFragment
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
@@ -7,6 +8,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,22 +21,23 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.level2.ContactAdapter
+import com.example.level2.presentation.ui.fragments.adapters.ContactAdapter
 import com.example.level2.R
-import com.example.level2.SwipeToDeleteCallback
+import com.example.level2.presentation.utils.SwipeToDeleteCallback
 import com.example.level2.databinding.FragmentContactListBinding
-import com.example.level2.fragments.AddContactDialogFragment
-import com.example.level2.model.Contact
+import com.example.level2.data.model.Contact
+import com.example.level2.data.model.LocalUsers
 import com.google.android.material.snackbar.Snackbar
 
 interface ItemClickListener {
     fun onContactDelete(contact: Contact)
-    fun onContactDetail(contact: Contact,extras:Navigator.Extras)
+    fun onContactDetail(contact: Contact, extras:Navigator.Extras)
 }
 
-class ContactListFragment: Fragment(),ItemClickListener  {
+class ContactListFragment: Fragment(), ItemClickListener {
     private lateinit var binding: FragmentContactListBinding
     private lateinit var adapter: ContactAdapter
+
     private  val viewModel: ContactListViewModel by viewModels()
 
     override fun onCreateView(
@@ -51,7 +54,9 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         adapter = ContactAdapter(this)
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
-        viewModel.setUsers(getContactsFromPhone())
+
+        getContactsFromPhone()
+
         viewModel.contacts.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -62,7 +67,7 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         val callback=object: SwipeToDeleteCallback()
         {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onContactDelete(adapter.currentList[viewHolder.bindingAdapterPosition])
+                onContactDelete(adapter.currentList[viewHolder.adapterPosition])
             }
         }
         val itemTouchHelper= ItemTouchHelper(callback)
@@ -78,7 +83,7 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         dialog.show(childFragmentManager, "AddContactDialog")
     }
 
-    override fun onContactDetail(contact: Contact,extras: Navigator.Extras) {
+    override fun onContactDetail(contact: Contact, extras: Navigator.Extras) {
 
         val action=ContactListFragmentDirections.actionContactListFragmentToDetailViewFragment(
             contact.photo,contact.name,contact.career,contact.address
@@ -86,7 +91,7 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         view?.findNavController()?.navigate(action,extras)
 
     }
-    override fun onContactDelete(contact:Contact) {
+    override fun onContactDelete(contact: Contact) {
         viewModel.deleteContact(contact)
         showSnackBar()
 
@@ -102,15 +107,24 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         }
         snackBar.show()
     }
-    @SuppressLint("Range")
-    fun getContactsFromPhone(): List<Contact> {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 0)
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 123) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                viewModel.setUsers(readContact())
+            }
+
         }
+    }
+
+
+    @SuppressLint("Range")
+    private fun readContact(): MutableList<Contact> {
         val contactsList = mutableListOf<Contact>()
         val contentResolver: ContentResolver = requireContext().contentResolver
         val cursor: Cursor? = contentResolver.query(
@@ -122,20 +136,30 @@ class ContactListFragment: Fragment(),ItemClickListener  {
         )
         cursor?.let {
             while (it.moveToNext()) {
-                val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
                 val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                 contactsList.add(
                     Contact(
-                        id.toInt(),
                         name,
                         "career",
-                         "address",
-                        R.drawable.baseline_android_24.toString()
+                        "",
+                        "address"
                     )
                 )
             }
             it.close()
         }
         return contactsList
+    }
+
+    private fun getContactsFromPhone() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            viewModel.setUsers(readContact())
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 123)
+        }
     }
 }

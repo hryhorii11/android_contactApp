@@ -1,4 +1,4 @@
-package com.example.level2
+package com.example.level2.presentation.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

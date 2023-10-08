@@ -1,4 +1,4 @@
-package com.example.level2.ext
+package com.example.level2.presentation.utils.ext
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
