@@ -9,12 +9,12 @@ class UsersViewModel : ViewModel() {
     private var contactToReturn: Contact? = null
     private var contactToReturnPosition: Int? = null
     private val _contacts = MutableLiveData<List<Contact>>(listOf())
-    val contacts = _contacts // TODO: val
+    val contacts = _contacts
 
     fun setUsers(contactList: List<Contact>) {
-//        _contacts.value=contactList.toMutableList()
-//        contacts=_contacts
-        _contacts.value = LocalUsers().getUsers()
+        if (contactList.isNotEmpty())
+            _contacts.value = contactList
+        else _contacts.value = LocalUsers().getUsers()
     }
 
     fun deleteContact(contact: Contact) {
@@ -31,11 +31,20 @@ class UsersViewModel : ViewModel() {
         _contacts.value = currentList?.toList()
     }
 
-    fun returnContact() { // TODO: check if already added this contact
+    fun returnContact() {
         val currentList = _contacts.value?.toMutableList()
-        currentList?.let {
-            contactToReturn?.let { it1 -> contactToReturnPosition?.let { it2 -> it.add(it2, it1) } }
-            _contacts.value = it.toList()
+        if (!currentList?.contains(contactToReturn)!!) {
+            currentList.let {
+                contactToReturn?.let { it1 ->
+                    contactToReturnPosition?.let { it2 ->
+                        it.add(
+                            it2,
+                            it1
+                        )
+                    }
+                }
+                _contacts.value = it.toList()
+            }
         }
         contactToReturn = null
         contactToReturnPosition = null
