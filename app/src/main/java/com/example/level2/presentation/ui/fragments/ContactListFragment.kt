@@ -26,7 +26,6 @@ import com.example.level2.R
 import com.example.level2.presentation.utils.SwipeToDeleteCallback
 import com.example.level2.databinding.FragmentContactListBinding
 import com.example.level2.data.model.Contact
-import com.example.level2.data.model.LocalUsers
 import com.google.android.material.snackbar.Snackbar
 
 interface ItemClickListener {

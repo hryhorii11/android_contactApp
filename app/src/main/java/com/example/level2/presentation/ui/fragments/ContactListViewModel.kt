@@ -3,8 +3,9 @@ package com.example.level2.presentation.ui.fragments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.level2.data.LocalUsers
 import com.example.level2.data.model.Contact
-import com.example.level2.data.model.LocalUsers
+
 
 class ContactListViewModel
     :ViewModel() {
@@ -13,7 +14,7 @@ class ContactListViewModel
     private val _contacts=MutableLiveData<List<Contact>>()
     var contacts:LiveData<List<Contact>> = _contacts
      init {
-         _contacts.value=LocalUsers().getUsers()
+         _contacts.value= LocalUsers().getUsers()
      }
     fun setUsers(contactList: List<Contact>)
     {

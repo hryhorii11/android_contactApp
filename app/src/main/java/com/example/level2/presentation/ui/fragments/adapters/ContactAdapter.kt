@@ -1,19 +1,15 @@
 package com.example.level2.presentation.ui.fragments.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.level2.R
 import com.example.level2.databinding.UserItemBinding
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
+import com.example.level2.presentation.ui.activities.contacts.adapter.utils.ItemCallback
 import com.example.level2.presentation.ui.fragments.ItemClickListener
-import com.example.level2.presentation.ui.fragments.adapters.util.ItemCallback
 
 
 class ContactAdapter(private val itemClickListener: ItemClickListener) :
