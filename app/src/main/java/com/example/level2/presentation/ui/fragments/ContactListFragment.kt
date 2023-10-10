@@ -1,19 +1,15 @@
 package com.example.level2.presentation.ui.fragments
 
-import AddContactDialogFragment
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
-import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigator
@@ -23,9 +19,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.presentation.ui.fragments.adapters.ContactAdapter
 import com.example.level2.R
+import com.example.level2.data.LocalUsers
 import com.example.level2.presentation.utils.SwipeToDeleteCallback
 import com.example.level2.databinding.FragmentContactListBinding
 import com.example.level2.data.model.Contact
+import com.example.level2.presentation.utils.Constants.ADD_CONTACT_TAG
 import com.google.android.material.snackbar.Snackbar
 
 interface ItemClickListener {
@@ -36,7 +34,8 @@ interface ItemClickListener {
 class ContactListFragment: Fragment(), ItemClickListener {
     private lateinit var binding: FragmentContactListBinding
     private lateinit var adapter: ContactAdapter
-
+    private val permissionLauncher=registerForActivityResult(RequestPermission(),
+        ::onGotPermissionResult)
     private  val viewModel: ContactListViewModel by viewModels()
 
     override fun onCreateView(
@@ -66,7 +65,7 @@ class ContactListFragment: Fragment(), ItemClickListener {
         val callback=object: SwipeToDeleteCallback()
         {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onContactDelete(adapter.currentList[viewHolder.adapterPosition])
+                onContactDelete(adapter.currentList[viewHolder.bindingAdapterPosition])
             }
         }
         val itemTouchHelper= ItemTouchHelper(callback)
@@ -79,7 +78,7 @@ class ContactListFragment: Fragment(), ItemClickListener {
 
     private fun showAddContactDialog() {
         val dialog = AddContactDialogFragment(viewModel)
-        dialog.show(childFragmentManager, "AddContactDialog")
+        dialog.show(childFragmentManager, ADD_CONTACT_TAG)
     }
 
     override fun onContactDetail(contact: Contact, extras: Navigator.Extras) {
@@ -106,22 +105,13 @@ class ContactListFragment: Fragment(), ItemClickListener {
         }
         snackBar.show()
     }
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 123) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                viewModel.setUsers(readContact())
-            }
-
-        }
+    private fun onGotPermissionResult(granted:Boolean)
+    {
+        if (granted)
+            viewModel.setUsers(readContact())
+        else
+            viewModel.setUsers(LocalUsers().getUsers())
     }
-
-
     @SuppressLint("Range")
     private fun readContact(): MutableList<Contact> {
         val contactsList = mutableListOf<Contact>()
@@ -151,14 +141,6 @@ class ContactListFragment: Fragment(), ItemClickListener {
     }
 
     private fun getContactsFromPhone() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_CONTACTS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            viewModel.setUsers(readContact())
-        } else {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 123)
-        }
+        permissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
 }

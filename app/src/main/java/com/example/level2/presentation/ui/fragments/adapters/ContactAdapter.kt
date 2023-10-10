@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.databinding.UserItemBinding
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
-import com.example.level2.presentation.ui.activities.contacts.adapter.utils.ItemCallback
+import com.example.level2.presentation.ui.fragments.adapters.util.ItemCallback
 import com.example.level2.presentation.ui.fragments.ItemClickListener
 
 

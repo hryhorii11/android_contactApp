@@ -1,4 +1,4 @@
-
+package com.example.level2.presentation.ui.fragments
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -14,7 +14,6 @@ import com.example.level2.R
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
 import com.example.level2.databinding.ActivityAddContactBinding
-import com.example.level2.presentation.ui.fragments.ContactListViewModel
 import com.example.level2.presentation.utils.Validation.isCareerValid
 import com.example.level2.presentation.utils.Validation.isEmailValid
 import com.example.level2.presentation.utils.Validation.isPhoneValid

@@ -3,7 +3,6 @@ package com.example.level2.presentation.ui.fragments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.level2.data.LocalUsers
 import com.example.level2.data.model.Contact
 
 
@@ -13,9 +12,7 @@ class ContactListViewModel
     private var contactToReturnPosition:Int?=null
     private val _contacts=MutableLiveData<List<Contact>>()
     var contacts:LiveData<List<Contact>> = _contacts
-     init {
-         _contacts.value= LocalUsers().getUsers()
-     }
+
     fun setUsers(contactList: List<Contact>)
     {
             _contacts.value = contactList
