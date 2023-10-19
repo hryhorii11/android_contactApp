@@ -5,7 +5,7 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity">
+    tools:context=".presentation.ui.activities.AuthActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewHello"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_layout_password" />
 
-    <com.example.myapplication.GoogleButtonView
+    <com.example.myapplication.presentation.utils.views.GoogleButtonView
         android:id="@+id/buttonGoogle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
         android:id="@+id/button_signIn"
         android:layout_width="@dimen/buttonSignInWidth"
         android:layout_height="@dimen/buttonSignInHeight"
-        android:background="@color/trasnparentColor"
+        android:background="@color/transparentColor"
         android:fontFamily="@font/opens_sans"
         android:text="@string/sign_in"
         android:textColor="@color/white"

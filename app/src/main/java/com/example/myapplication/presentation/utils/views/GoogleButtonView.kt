@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.presentation.utils.views
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -9,6 +9,7 @@ import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
+import com.example.myapplication.R
 
 class GoogleButtonView : androidx.appcompat.widget.AppCompatButton {
 

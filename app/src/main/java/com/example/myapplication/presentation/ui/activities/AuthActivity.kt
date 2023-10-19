@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.presentation.ui.activities
 
 
 import android.content.Intent
@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityAuthBinding
-val emailKey = "email"
-val passwordKey = "password"
+const val emailKey = "email"
+const val passwordKey = "password"
 class AuthActivity : AppCompatActivity() {
 
     private val intentEmailKey = "email"

@@ -24,5 +24,25 @@
     <string name="invalid_email">Некоректний емайл</string>
     <string name="or">або</string>
     <string name="google">Google</string>
+    <string name="contacts">Контакти</string>
+    <string name="add_contacts">Додати контакти</string>
+    <string name="contact_has_been_removed">Контакти видалено</string>
+    <string name="add_contact">Додати контакт</string>
+    <string name="username">Ім\'я</string>
+    <string name="phone">Телефон</string>
+    <string name="address">Адрес</string>
+    <string name="remove_contact">Контакт видалено</string>
+    <string name="save">Зберегти</string>
+    <string name="date_of_birth">Дата народження</string>
+    <string name="firstname_lastname">Ім\'я Прізвище</string>
+    <string name="careerHint">Професія</string>
+    <string name="invalid_username_there_must_be_a_first_and_last_name">некоретне ім\'я користувача, повинне бути ім\'я і прізвище</string>
+    <string name="cannot_be_blank">поле не може бути пустим</string>
+    <string name="must_be_10_numbers">повинен містити 10 цифр</string>
+    <string name="incorrect_date">некоректна дата</string>
+    <string name="fill_in_all_fields_correctly">заповніть всі поля коректно</string>
+    <string name="message">ПОВІДОМЛЕННЯ</string>
+    <string name="profile">Профіль</string>
+    <string name="contact_name">ім\'я контакту</string>
 
 </resources>

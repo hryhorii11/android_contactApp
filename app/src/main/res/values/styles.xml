@@ -28,5 +28,9 @@
         <item name="colorControlActivated">@color/white</item>
         <item name="controlBackground">@color/themeColor</item>
     </style>
-
+    <style name="checkBoxMultiSelectStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/transparentColor</item>
+        <item name="colorControlActivated">@color/transparentColor</item>
+        <item name="controlBackground">@color/transparentColor</item>
+    </style>
 </resources>
