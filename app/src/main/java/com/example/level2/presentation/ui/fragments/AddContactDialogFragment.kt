@@ -1,4 +1,5 @@
 package com.example.level2.presentation.ui.fragments
+
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -78,6 +79,7 @@ class AddContactDialogFragment(private val viewModel: ContactListViewModel) : Di
                 imageUri.toString()
             )
             viewModel.addContact(user)
+            dismiss()
             close()
         } else {
             Toast.makeText(
@@ -88,52 +90,49 @@ class AddContactDialogFragment(private val viewModel: ContactListViewModel) : Di
     }
 
     private fun close() {
-        dialog?.dismiss()
+
     }
 
     private fun setValidations() {
-        binding.edittextUsername.doOnTextChanged { text, _, _, _ ->
-            if (!isUsernameValid(text.toString()))
-                binding.textInputLayoutUsername.error =
-                    getString(R.string.invalid_username_there_must_be_a_first_and_last_name)
-            else
-                binding.textInputLayoutUsername.error = null
+        with(binding) {
+            edittextUsername.doOnTextChanged { text, _, _, _ ->
+                if (!isUsernameValid(text.toString())) binding.textInputLayoutUsername.error =
+                    getString(R.string.invalid_username_there_must_be_a_first_and_last_name) else binding.textInputLayoutUsername.error =
+                    null
+            }
+            binding.edittextCareer.doOnTextChanged { text, _, _, _ ->
+                if (!isCareerValid(text.toString()))
+                    binding.textInputLayoutCareer.error = getString(R.string.cannot_be_blank)
+                else
+                    binding.textInputLayoutCareer.error = null
+            }
+            binding.edittextEmail.doOnTextChanged { text, _, _, _ ->
+                if (!isEmailValid(text.toString()))
+                    binding.textInputLayoutEmail.error = getString(R.string.invalid_email)
+                else
+                    binding.textInputLayoutEmail.error = null
+            }
+            binding.edittextPhone.doOnTextChanged { text, _, _, _ ->
+                if (!isPhoneValid(text.toString()))
+                    binding.textInputLayoutPhone.error =
+                        getString(R.string.must_be_10_numbers)
+                else
+                    binding.textInputLayoutPhone.error = null
+            }
+            binding.edittextAdress.doOnTextChanged { text, _, _, _ ->
+                if (!isCareerValid(text.toString()))
+                    binding.textInputLayoutAdress.error = getString(R.string.cannot_be_blank)
+                else
+                    binding.textInputLayoutAdress.error = null
+            }
+            binding.edittextDateOfBirth.doOnTextChanged { text, _, _, _ ->
+                if (!isValidDate(text.toString()))
+                    binding.textInputLayoutDateOfBirth.error =
+                        getString(R.string.incorrect_date)
+                else
+                    binding.textInputLayoutDateOfBirth.error = null
+            }
         }
-        binding.edittextCareer.doOnTextChanged { text, _, _, _ ->
-            if (!isCareerValid(text.toString()))
-                binding.textInputLayoutCareer.error = getString(R.string.cannot_be_blank)
-            else
-                binding.textInputLayoutCareer.error = null
-        }
-        binding.edittextEmail.doOnTextChanged { text, _, _, _ ->
-            if (!isEmailValid(text.toString()))
-                binding.textInputLayoutEmail.error = getString(R.string.invalid_email)
-            else
-                binding.textInputLayoutEmail.error = null
-        }
-        binding.edittextPhone.doOnTextChanged { text, _, _, _ ->
-            if (!isPhoneValid(text.toString()))
-                binding.textInputLayoutPhone.error =
-                    getString(R.string.must_be_10_numbers)
-            else
-                binding.textInputLayoutPhone.error = null
-        }
-        binding.edittextAdress.doOnTextChanged { text, _, _, _ ->
-            if (!isCareerValid(text.toString()))
-                binding.textInputLayoutAdress.error = getString(R.string.cannot_be_blank)
-            else
-                binding.textInputLayoutAdress.error = null
-        }
-        binding.edittextDateOfBirth.doOnTextChanged { text, _, _, _ ->
-            if (!isValidDate(text.toString()))
-                binding.textInputLayoutDateOfBirth.error =
-                    getString(R.string.incorrect_date)
-            else
-                binding.textInputLayoutDateOfBirth.error = null
-        }
+
     }
-
-
-
-
 }

@@ -13,11 +13,10 @@ import com.example.level2.presentation.ui.fragments.ItemClickListener
 
 
 class ContactAdapter(private val itemClickListener: ItemClickListener) :
-    ListAdapter<Contact, ContactAdapter.ContactHolder>(ItemCallback)
-    {
+    ListAdapter<Contact, ContactAdapter.ContactHolder>(ItemCallback) {
 
-    inner class ContactHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root)
-    {
+    inner class ContactHolder(private val binding: UserItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             with(binding) {
                 buttonDeleteUser.tag = contact
@@ -29,10 +28,19 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
         }
 
         private fun setListeners(contact: Contact) {
+            with(binding) {
+                cardViewItem.setOnClickListener { toDetainScreen(contact) }
+                buttonDeleteUser.setOnClickListener { itemClickListener.onContactDelete(contact) }
+            }
+        }
 
-            val extras = FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail")
-            binding.cardViewItem.setOnClickListener{itemClickListener.onContactDetail(contact, extras )}
-            binding.buttonDeleteUser.setOnClickListener { itemClickListener.onContactDelete(contact) }
+        private fun toDetainScreen(contact: Contact) {
+            val extras =
+                FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail") // TODO: to constants
+            itemClickListener.onContactDetail(
+                contact,
+                extras
+            )
         }
     }
 
@@ -48,7 +56,7 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
     }
 
 
-    }
+}
 
 
 

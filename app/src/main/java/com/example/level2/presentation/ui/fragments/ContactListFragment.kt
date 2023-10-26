@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.level2.presentation.ui.fragments.adapters.ContactAdapter
@@ -24,52 +24,56 @@ import com.example.level2.presentation.utils.SwipeToDeleteCallback
 import com.example.level2.databinding.FragmentContactListBinding
 import com.example.level2.data.model.Contact
 import com.example.level2.presentation.utils.Constants.ADD_CONTACT_TAG
+import com.example.level2.presentation.utils.ext.swipeToDelete
 import com.google.android.material.snackbar.Snackbar
 
 interface ItemClickListener {
     fun onContactDelete(contact: Contact)
-    fun onContactDetail(contact: Contact, extras:Navigator.Extras)
+    fun onContactDetail(contact: Contact, extras: Navigator.Extras)
 }
 
-class ContactListFragment: Fragment(), ItemClickListener {
+class ContactListFragment : Fragment(), ItemClickListener {
     private lateinit var binding: FragmentContactListBinding
     private lateinit var adapter: ContactAdapter
-    private val permissionLauncher=registerForActivityResult(RequestPermission(),
-        ::onGotPermissionResult)
-    private  val viewModel: ContactListViewModel by viewModels()
+    private val permissionLauncher = registerForActivityResult(
+        RequestPermission(),
+        ::onGotPermissionResult
+    )
+    private val viewModel: ContactListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        super.onCreate(savedInstanceState)
-        binding = FragmentContactListBinding.inflate(layoutInflater)
+        binding = FragmentContactListBinding.inflate(layoutInflater) // TODO: to by lazy
+        setRecyclerView()
         setListeners()
         setTouchHelper()
-
-        adapter = ContactAdapter(this)
-        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.recycler.adapter = adapter
-
+        setObserver()
         getContactsFromPhone()
-
-        viewModel.contacts.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
         return binding.root
     }
 
-    private fun setTouchHelper() {
-        val callback=object: SwipeToDeleteCallback()
-        {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onContactDelete(adapter.currentList[viewHolder.bindingAdapterPosition])
-            }
+    private fun setObserver() {
+        viewModel.contacts.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
-        val itemTouchHelper= ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(binding.recycler)
+    }
+
+    private fun setRecyclerView() {
+        adapter = ContactAdapter(this) // TODO: from this to anonymous
+        binding.recycler.adapter = adapter
+    }
+
+    private fun setTouchHelper() {
+        binding.recycler.swipeToDelete { onContactDelete(viewModel.getContactFromPosition(it)) }
+//        val callback = object : SwipeToDeleteCallback() {
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//
+//            }
+//        }
+
     }
 
     private fun setListeners() {
@@ -83,35 +87,33 @@ class ContactListFragment: Fragment(), ItemClickListener {
 
     override fun onContactDetail(contact: Contact, extras: Navigator.Extras) {
 
-        val action=ContactListFragmentDirections.actionContactListFragmentToDetailViewFragment(
-            contact.photo,contact.name,contact.career,contact.address
+        val action = ContactListFragmentDirections.actionContactListFragmentToDetailViewFragment(
+            contact.photo, contact.name, contact.career, contact.address
         )
-        view?.findNavController()?.navigate(action,extras)
-
+        findNavController().navigate(action, extras)
     }
+
     override fun onContactDelete(contact: Contact) {
         viewModel.deleteContact(contact)
-        showSnackBar()
+        showSnackBar() // TODO: if have contact -> show else not show
+    }
 
-    }
     private fun showSnackBar() {
-        val snackBar =
-            Snackbar.make(
-                binding.root,
-                getString(R.string.remove_contact), Snackbar.LENGTH_LONG
-            )
-        snackBar.setAction("cancel") {
+        Snackbar.make(
+            binding.root,
+            getString(R.string.remove_contact), Snackbar.LENGTH_LONG
+        ).setAction("cancel") {// TODO: to res
             viewModel.returnContact()
-        }
-        snackBar.show()
+        }.show()
     }
-    private fun onGotPermissionResult(granted:Boolean)
-    {
+
+    private fun onGotPermissionResult(granted: Boolean) {
         if (granted)
             viewModel.setUsers(readContact())
         else
             viewModel.setUsers(LocalUsers().getUsers())
     }
+
     @SuppressLint("Range")
     private fun readContact(): MutableList<Contact> {
         val contactsList = mutableListOf<Contact>()
@@ -123,7 +125,7 @@ class ContactListFragment: Fragment(), ItemClickListener {
             null,
             null
         )
-        cursor?.let {
+        cursor?.use {
             while (it.moveToNext()) {
                 val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                 contactsList.add(

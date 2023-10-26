@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <View
         android:id="@+id/viewTop"
@@ -22,27 +22,27 @@
         android:layout_width="@dimen/buttonBackSize"
         android:layout_height="@dimen/buttonBackSize"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:scaleType="centerCrop"
         android:background="@color/trasnparentColor"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_back_button"
-        app:layout_constraintTop_toTopOf="@id/textViewProfile"
         app:layout_constraintBottom_toBottomOf="@id/textViewProfile"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/textViewProfile" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/textViewProfileTopMargin"
+        android:fontFamily="@font/opens_sans"
         android:text="@string/profile"
+        android:textColor="@color/white"
         android:textSize="@dimen/biggerTextSize"
         android:textStyle="bold"
-        android:fontFamily="@font/opens_sans"
-        android:layout_marginTop="@dimen/textViewProfileTopMargin"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/viewBottom"
         android:layout_width="0dp"
@@ -60,9 +60,9 @@
         android:layout_width="@dimen/contactImageSize"
         android:layout_height="@dimen/contactImageSize"
         android:layout_centerInParent="true"
-        android:transitionName="sharedImageFromDetail"
         android:layout_marginTop="@dimen/contactImageTopMargin"
         android:scaleType="centerCrop"
+        android:transitionName="sharedImageFromDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -116,42 +116,42 @@
         android:id="@+id/imageButtonFacebook"
         android:layout_width="@dimen/socialNetworkImageSize"
         android:layout_height="@dimen/socialNetworkImageSize"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:src="@drawable/ic_facebook"
-        app:layout_constraintEnd_toEndOf="@id/imageButtonIn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonIn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@id/viewBottom"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageButton
         android:id="@+id/imageButtonIn"
         android:layout_width="@dimen/socialNetworkImageSize"
         android:layout_height="@dimen/socialNetworkImageSize"
-        android:layout_marginStart="@dimen/socialNetworkMargin"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:src="@drawable/ic_in"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonFacebook"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonInstagram"
         app:layout_constraintStart_toEndOf="@id/imageButtonFacebook"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonFacebook" />
 
     <ImageButton
         android:id="@+id/imageButtonInstagram"
         android:layout_width="@dimen/socialNetworkImageSize"
         android:layout_height="@dimen/socialNetworkImageSize"
-        android:layout_marginStart="@dimen/socialNetworkMargin"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:src="@drawable/ic_instagram"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonIn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageButtonIn"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIn" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMessageProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="@dimen/buttonMessageTopMargin"
-        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/opens_sans"
         android:paddingTop="@dimen/standardPadding"
@@ -162,7 +162,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

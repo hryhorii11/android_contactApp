@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.level2.databinding.FragmentDetailBinding
 import com.example.level2.presentation.utils.ext.setPhoto
@@ -21,6 +22,7 @@ class DetailViewFragment : Fragment() {
     ): View {
         super.onCreate(savedInstanceState)
 
+
         sharedElementEnterTransition = TransitionInflater.from(requireContext())
             .inflateTransition(android.R.transition.slide_left)
 
@@ -32,7 +34,7 @@ class DetailViewFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.buttonBack.setOnClickListener { close() }
+        binding.buttonBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun setData() {
@@ -47,8 +49,7 @@ class DetailViewFragment : Fragment() {
 
     private fun close()
      {
-         val fragmentManager = requireActivity().supportFragmentManager
-         fragmentManager.popBackStack()
+
      }
 
 }

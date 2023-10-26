@@ -9,68 +9,79 @@
 
     <View
         android:id="@+id/viewTop"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/viewTopHeight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/themeColor"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:layout_width="@dimen/buttonBackSize"
         android:layout_height="@dimen/buttonBackSize"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginTop="@dimen/buttonBackTopMargin"
-        android:scaleType="centerCrop"
         android:background="@color/trasnparentColor"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_back_button"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:layout_width="@dimen/buttonSearchSize"
         android:layout_height="@dimen/buttonSearchSize"
-        android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginTop="@dimen/buttonSearchTopMargin"
-        android:scaleType="centerCrop"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@color/trasnparentColor"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_search_button"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/contacts"
-        android:textSize="@dimen/superBigTextSize"
         android:layout_marginTop="@dimen/textViewContactTopMargin"
-        android:textColor="@color/white"
         android:fontFamily="@font/opens_sans"
+        android:text="@string/contacts"
+        android:textColor="@color/white"
+        android:textSize="@dimen/superBigTextSize"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-    <androidx.appcompat.widget.AppCompatButton
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/buttonAddContact"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/buttonAddHeight"
+        android:layout_height="wrap_content"
+
         android:text="@string/add_contacts"
-        android:layout_marginTop="@dimen/buttonAddTopMargin"
-        android:layout_marginStart="@dimen/horizontalMargin"
-        android:textSize="@dimen/mediumTextSize"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:textAllCaps="false"
-        android:background="@color/trasnparentColor"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/viewTop"
+        app:layout_constraintVertical_bias="0.8"
+        android:layout_marginStart="16dp"
 
         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/recyclerTopMargin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:transitionGroup="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTop"
         tools:listitem="@layout/user_item"
         />
 
