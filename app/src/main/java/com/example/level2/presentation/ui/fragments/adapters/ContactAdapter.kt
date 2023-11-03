@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.level2.databinding.UserItemBinding
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
+import com.example.level2.databinding.UserItemBinding
 import com.example.level2.presentation.ui.fragments.adapters.util.ItemCallback
 import com.example.level2.presentation.ui.fragments.ItemClickListener
+import com.example.level2.presentation.utils.Constants.DETAIL_EXTRAS_NAME
 
 
 class ContactAdapter(private val itemClickListener: ItemClickListener) :
@@ -36,7 +37,7 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
 
         private fun toDetainScreen(contact: Contact) {
             val extras =
-                FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail") // TODO: to constants
+                FragmentNavigatorExtras(binding.imageViewContactPhoto to DETAIL_EXTRAS_NAME)
             itemClickListener.onContactDetail(
                 contact,
                 extras

@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.navGraphViewModels
 import com.example.level2.R
 import com.example.level2.presentation.utils.ext.setPhoto
 import com.example.level2.data.model.Contact
@@ -21,9 +22,8 @@ import com.example.level2.presentation.utils.Validation.isPhoneValid
 import com.example.level2.presentation.utils.Validation.isUsernameValid
 import com.example.level2.presentation.utils.Validation.isValidDate
 
-
-class AddContactDialogFragment(private val viewModel: ContactListViewModel) : DialogFragment() {
-
+class AddContactDialogFragment  : DialogFragment() {
+    private val viewModel:ContactListViewModel by navGraphViewModels(R.id.nav)
     private val binding: ActivityAddContactBinding by lazy {
         ActivityAddContactBinding.inflate(layoutInflater)
     }
@@ -52,7 +52,7 @@ class AddContactDialogFragment(private val viewModel: ContactListViewModel) : Di
 
     private fun setListeners() {
         with(binding) {
-            backButton.setOnClickListener { close() }
+            backButton.setOnClickListener { dismiss() }
             buttonSave.setOnClickListener { addUser() }
             buttonAddPhoto.setOnClickListener { addPhoto() }
         }
@@ -80,7 +80,6 @@ class AddContactDialogFragment(private val viewModel: ContactListViewModel) : Di
             )
             viewModel.addContact(user)
             dismiss()
-            close()
         } else {
             Toast.makeText(
                 context,
@@ -88,11 +87,6 @@ class AddContactDialogFragment(private val viewModel: ContactListViewModel) : Di
             ).show()
         }
     }
-
-    private fun close() {
-
-    }
-
     private fun setValidations() {
         with(binding) {
             edittextUsername.doOnTextChanged { text, _, _, _ ->

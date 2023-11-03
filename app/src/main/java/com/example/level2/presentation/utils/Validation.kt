@@ -18,7 +18,7 @@ object Validation {
     }
 
     fun isPhoneValid(phone: String): Boolean {
-        return phone.length == Constants.phoneNumbers
+        return phone.length == Constants.PHONE_NUMBERS
     }
 
     fun isValidDate(inputDate: String): Boolean {

@@ -28,5 +28,6 @@
     <string name="message">MESSAGE</string>
     <string name="profile">Profile</string>
     <string name="contact_name">contact_name</string>
+    <string name="cancel">cancel</string>
 
 </resources>

@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.level2.data.LocalUsers
 import com.example.level2.data.model.Contact
 
-
-class ContactListViewModel : ViewModel() {
-    private var contactToReturn: Contact? = null
-    private var contactToReturnPosition: Int? = null
+class ContactListViewModel: ViewModel() {
     private var lastDeletedContact: Pair<Int, Contact>? = null
 
     private val _contacts = MutableLiveData<List<Contact>>()
@@ -20,7 +17,7 @@ class ContactListViewModel : ViewModel() {
     }
 
     fun setUsers(contactList: List<Contact>) {
-        // _contacts.value = contactList
+         _contacts.value = contactList
     }
 
     fun deleteContact(contact: Contact) {
@@ -42,27 +39,7 @@ class ContactListViewModel : ViewModel() {
         _contacts.value = currentList?.toList()
     }
 
-//    fun returnContact() { // TODO: not correctly
-//        val currentList = _contacts.value.orEmpty().toMutableList()
-//        if (!currentList?.contains(contactToReturn)!!) {
-//            currentList.let {
-//                contactToReturn?.let { it1 ->
-//                    contactToReturnPosition?.let { it2 ->
-//                        it.add(
-//                            it2,
-//                            it1
-//                        )
-//                    }
-//                }
-//                _contacts.value = it.toList()
-//            }
-//        }
-//        contactToReturn = null
-//        contactToReturnPosition = null
-//    }
-
-
-    fun returnContact() { // TODO: not correctly
+    fun returnContact() {
         lastDeletedContact?.let {
             val currentList = _contacts.value.orEmpty().toMutableList()
             currentList.add(it.first, it.second)

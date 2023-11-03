@@ -46,10 +46,4 @@ class DetailViewFragment : Fragment() {
             imageViewContactPhoto.setPhoto(args.photo)
         }
     }
-
-    private fun close()
-     {
-
-     }
-
 }
