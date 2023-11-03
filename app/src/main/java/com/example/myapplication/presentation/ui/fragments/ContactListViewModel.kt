@@ -8,8 +8,8 @@ import com.example.myapplication.data.model.Contact
 
 class ContactListViewModel
     : ViewModel() {
-    private var contactToReturn: Contact? = null
-    private var contactToReturnPosition: Int? = null
+    private var lastDeletedContact: Pair<Int, Contact>? = null
+
     private val _contacts = MutableLiveData<List<Contact>>()
     var contacts: LiveData<List<Contact>> = _contacts
 
@@ -18,11 +18,13 @@ class ContactListViewModel
     }
 
     fun deleteContact(contact: Contact) {
-        _contacts.value = contacts.value?.toMutableList()?.apply {
-            contactToReturn = contact
-            contactToReturnPosition = indexOf(contact)
-            remove(contact)
+        if(lastDeletedContact?.second != contact) {
+            _contacts.value = contacts.value?.toMutableList()?.apply {
+                lastDeletedContact = indexOf(contact) to contact
+                remove(contact)
+            }
         }
+
     }
 
     fun addContact(contact: Contact) {
@@ -37,21 +39,11 @@ class ContactListViewModel
         _contacts.value=contactList?.filter { !it.isChecked }
     }
     fun returnContact() {
-        val currentList = _contacts.value?.toMutableList()
-        if (!currentList?.contains(contactToReturn)!!) {
-            currentList.let {
-                contactToReturn?.let { it1 ->
-                    contactToReturnPosition?.let { it2 ->
-                        it.add(
-                            it2,
-                            it1
-                        )
-                    }
-                }
-                _contacts.value = it.toList()
-            }
+        lastDeletedContact?.let {
+            val currentList = _contacts.value.orEmpty().toMutableList()
+            currentList.add(it.first, it.second)
+            lastDeletedContact = null
+            _contacts.value = currentList
         }
-        contactToReturn = null
-        contactToReturnPosition = null
     }
 }

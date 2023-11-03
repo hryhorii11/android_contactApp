@@ -6,15 +6,17 @@ import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.database.Cursor
 import android.os.Bundle
+import android.os.Handler
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,19 +27,20 @@ import com.example.myapplication.presentation.utils.SwipeToDeleteCallback
 import com.example.myapplication.databinding.FragmentContactListBinding
 
 import com.example.myapplication.data.model.Contact
-import com.example.myapplication.presentation.utils.Constants.ADD_CONTACT_TAG
 import com.google.android.material.snackbar.Snackbar
 
 
 class ContactListFragment : Fragment(), ItemClickListener {
     private lateinit var binding: FragmentContactListBinding
     private lateinit var adapter: ContactAdapter
+    private var isNavigating=false
     private var itemTouchHelper: ItemTouchHelper? = null
     private val permissionLauncher = registerForActivityResult(
         RequestPermission(),
         ::onGotPermissionResult
     )
-    private val viewModel: ContactListViewModel by viewModels()
+
+    private val viewModel: ContactListViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,8 +92,14 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     private fun showAddContactDialog() {
-        val dialog = AddContactDialogFragment(viewModel)
-        dialog.show(childFragmentManager, ADD_CONTACT_TAG)
+        if(!isNavigating) {
+            isNavigating = true
+            findNavController().navigate(ViewPagerFragmentDirections.actionViewPagerFragmentToAddContactDialogFragment())
+            Handler().postDelayed(
+                { isNavigating = false },
+                1000
+            )
+        }
     }
 
     override fun onContactClick(contact: Contact, extras: Navigator.Extras) {
@@ -127,8 +136,9 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     override fun onContactDelete(contact: Contact) {
+        if (adapter.currentList.contains(contact))
+            showSnackBar()
         viewModel.deleteContact(contact)
-        showSnackBar()
     }
 
     private fun showSnackBar() {

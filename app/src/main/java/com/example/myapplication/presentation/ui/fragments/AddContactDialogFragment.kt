@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.navGraphViewModels
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Contact
 import com.example.myapplication.databinding.FragmentAddContactBinding
@@ -21,11 +22,12 @@ import com.example.myapplication.presentation.utils.Validation.isValidDate
 import com.example.myapplication.presentation.utils.ext.setPhoto
 
 
-class AddContactDialogFragment(private val viewModel: ContactListViewModel) : DialogFragment() {
+class AddContactDialogFragment : DialogFragment() {
 
     private val binding: FragmentAddContactBinding by lazy {
         FragmentAddContactBinding.inflate(layoutInflater)
     }
+    private val viewModel: ContactListViewModel by navGraphViewModels(R.id.nav_graph)
     private var imageUri: Uri? = null
     private lateinit var photoActivityResult: ActivityResultLauncher<Intent>
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
