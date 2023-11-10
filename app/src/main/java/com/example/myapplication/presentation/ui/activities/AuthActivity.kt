@@ -11,6 +11,8 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityAuthBinding
 const val emailKey = "email"
 const val passwordKey = "password"
+
+    // TODO validation in view model
 class AuthActivity : AppCompatActivity() {
 
     private val intentEmailKey = "email"

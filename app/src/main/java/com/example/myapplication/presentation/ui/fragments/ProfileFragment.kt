@@ -11,9 +11,11 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ProfileFragmentBinding
 import com.example.myapplication.presentation.ui.activities.emailKey
 
+
+private const val emailSeparator="@"
+private const val nameSeparatorsPattern= "[.,_]"
 class ProfileFragment:Fragment() {
-    private val emailSeparator="@"
-    private val nameSeparatorsPattern= "[.,_]"
+
     private lateinit var binding:ProfileFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,

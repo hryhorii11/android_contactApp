@@ -7,6 +7,6 @@ data class Contact(
     val career: String,
     val address:String,
     val photo: String,
-    var isChecked:Boolean=false,
+    var isChecked:Boolean=false,  // TODO var in data class - bad practice
     val id: UUID = UUID.randomUUID()
 )

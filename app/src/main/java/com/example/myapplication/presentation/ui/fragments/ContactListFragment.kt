@@ -64,7 +64,7 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     private fun setTouchHelper() {
-        val callback: SwipeToDeleteCallback
+        val callback: SwipeToDeleteCallback // TODO inline
         callback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 onContactDelete(adapter.currentList[viewHolder.adapterPosition])
@@ -160,7 +160,7 @@ class ContactListFragment : Fragment(), ItemClickListener {
             viewModel.setUsers(LocalUsers().getUsers())
     }
 
-    @SuppressLint("Range")
+    @SuppressLint("Range")  // TODO to repository
     fun getContactsFromPhone(): List<Contact> {
         val contactsList = mutableListOf<Contact>()
         val contentResolver: ContentResolver = requireContext().contentResolver

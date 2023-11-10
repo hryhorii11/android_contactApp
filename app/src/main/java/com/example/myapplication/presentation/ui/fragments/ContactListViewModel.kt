@@ -28,9 +28,9 @@ class ContactListViewModel
     }
 
     fun addContact(contact: Contact) {
-        val currentList = _contacts.value?.toMutableList()
-        currentList?.add(contact)
-        _contacts.value = currentList?.toList()
+//        val currentList = _contacts.value?.toMutableList()
+//        currentList?.add(contact)
+        _contacts.value = _contacts.value?.plus(contact)
     }
 
     fun deleteSelectedContacts()
