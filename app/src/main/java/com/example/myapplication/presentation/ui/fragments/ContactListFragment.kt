@@ -2,12 +2,8 @@ package com.example.myapplication.presentation.ui.fragments
 
 import com.example.myapplication.presentation.ui.fragments.interfaces.ItemClickListener
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.ContentResolver
-import android.database.Cursor
 import android.os.Bundle
 import android.os.Handler
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +21,6 @@ import com.example.myapplication.R
 import com.example.myapplication.data.LocalUsers
 import com.example.myapplication.presentation.utils.SwipeToDeleteCallback
 import com.example.myapplication.databinding.FragmentContactListBinding
-
 import com.example.myapplication.data.model.Contact
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,7 +28,7 @@ import com.google.android.material.snackbar.Snackbar
 class ContactListFragment : Fragment(), ItemClickListener {
     private lateinit var binding: FragmentContactListBinding
     private lateinit var adapter: ContactAdapter
-    private var isNavigating=false
+    private var isNavigating = false
     private var itemTouchHelper: ItemTouchHelper? = null
     private val permissionLauncher = registerForActivityResult(
         RequestPermission(),
@@ -64,16 +59,13 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     private fun setTouchHelper() {
-        val callback: SwipeToDeleteCallback // TODO inline
-        callback = object : SwipeToDeleteCallback() {
+        val callback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 onContactDelete(adapter.currentList[viewHolder.adapterPosition])
             }
         }
         itemTouchHelper = ItemTouchHelper(callback)
         attachItemTouchHelper()
-
-
     }
 
     private fun attachItemTouchHelper() {
@@ -92,7 +84,7 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     private fun showAddContactDialog() {
-        if(!isNavigating) {
+        if (!isNavigating) {
             isNavigating = true
             findNavController().navigate(ViewPagerFragmentDirections.actionViewPagerFragmentToAddContactDialogFragment())
             Handler().postDelayed(
@@ -113,8 +105,14 @@ class ContactListFragment : Fragment(), ItemClickListener {
         selectContact(contact)
     }
 
+    override fun togleSelect(contact: Contact) {
+        viewModel.toggleSelect(contact)
+    }
+
     private fun selectContact(contact: Contact) {
-        adapter.toggleSelection(adapter.currentList.indexOf(contact))
+        if (viewModel.toggleSelect(contact)) {
+            adapter.changeMode()
+        }
         if (!adapter.isSelectionMode) {
             binding.buttonDeleteSelectMode.visibility = View.GONE
             attachItemTouchHelper()
@@ -155,36 +153,9 @@ class ContactListFragment : Fragment(), ItemClickListener {
 
     private fun onGotPermissionResult(granted: Boolean) {
         if (granted)
-            viewModel.setUsers(getContactsFromPhone())
+            viewModel.setUsers(LocalUsers().getPhoneContacts())
         else
             viewModel.setUsers(LocalUsers().getUsers())
     }
 
-    @SuppressLint("Range")  // TODO to repository
-    fun getContactsFromPhone(): List<Contact> {
-        val contactsList = mutableListOf<Contact>()
-        val contentResolver: ContentResolver = requireContext().contentResolver
-        val cursor: Cursor? = contentResolver.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        cursor?.let {
-            while (it.moveToNext()) {
-                val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                contactsList.add(
-                    Contact(
-                        name,
-                        "career",
-                        "address",
-                        R.drawable.baseline_person_2_24.toString()
-                    )
-                )
-            }
-            it.close()
-        }
-        return contactsList
-    }
 }

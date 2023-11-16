@@ -8,4 +8,5 @@ interface ItemClickListener {
     fun onContactClick(contact: Contact, extras: Navigator.Extras)
     fun onContactChangeMode()
     fun onCheckBoxClick(contact: Contact)
+    fun togleSelect(contact:Contact)
 }

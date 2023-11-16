@@ -22,7 +22,6 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
 
     inner class ContactHolder(private val binding: UserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(contact: Contact) {
             with(binding) {
                 if (isSelectionMode) {
@@ -51,7 +50,6 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
             }
             setListeners(contact)
         }
-
         private fun setListeners(contact: Contact) {
             val extras =
                 FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail")
@@ -66,8 +64,10 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
                     itemClickListener.onCheckBoxClick(contact)
                 }
                 cardViewItem.setOnLongClickListener {
-                    itemClickListener.onContactChangeMode()
-                    contact.isChecked = !contact.isChecked
+                    if(!isSelectionMode) {
+                        itemClickListener.onContactChangeMode()
+                        itemClickListener.togleSelect(contact)
+                    }
                     true
                 }
                 buttonDeleteUser.setOnClickListener {
@@ -98,8 +98,7 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
 
 
     fun toggleSelection(position: Int) {
-        currentList[position].isChecked = !currentList[position].isChecked
-        notifyItemChanged(position)
+        //notifyItemChanged(position)
         if (currentList.none { it.isChecked })
             changeMode()
     }

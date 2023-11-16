@@ -27,14 +27,12 @@ class ViewPagerFragment : Fragment() {
         )
 
         val adapter =
-            ViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)
+            ViewPagerAdapter(fragmentList, childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
-
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
         }.attach()
         setTabText()
-
         return binding.root
     }
 

@@ -11,7 +11,7 @@ class ContactListViewModel
     private var lastDeletedContact: Pair<Int, Contact>? = null
 
     private val _contacts = MutableLiveData<List<Contact>>()
-    var contacts: LiveData<List<Contact>> = _contacts
+    val contacts: LiveData<List<Contact>> = _contacts
 
     fun setUsers(contactList: List<Contact>) {
         _contacts.value = contactList.toMutableList()
@@ -26,10 +26,22 @@ class ContactListViewModel
         }
 
     }
-
+     fun toggleSelect(contact: Contact):Boolean
+     {
+         _contacts.value = contacts.value?.map {
+             if (it == contact) {
+                 it.copy(isChecked = !it.isChecked)
+             } else {
+                 it
+             }
+         }
+         if(_contacts.value?.none{it.isChecked} == true)
+         {
+             return true
+         }
+       return false
+     }
     fun addContact(contact: Contact) {
-//        val currentList = _contacts.value?.toMutableList()
-//        currentList?.add(contact)
         _contacts.value = _contacts.value?.plus(contact)
     }
 
