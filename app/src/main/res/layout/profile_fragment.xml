@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.ui.fragments.ProfileFragment">
+    tools:context=".presentation.ui.main.fragments.profile.ProfileFragment">
 
 
     <View
@@ -24,6 +24,7 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
     <View
         android:id="@+id/viewBottom"
         android:layout_width="0dp"
@@ -31,7 +32,7 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewTop" />
 
@@ -127,44 +128,43 @@
         android:id="@+id/imageButtonFacebook"
         android:layout_width="@dimen/socialNetworkImgSize"
         android:layout_height="@dimen/socialNetworkImgSize"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:contentDescription="@string/facebookbutton"
         android:src="@drawable/ic_facebook"
         app:layout_constraintEnd_toEndOf="@id/imageButtonIn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@id/viewBottom"
+        app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"/>
 
     <ImageButton
         android:id="@+id/imageButtonIn"
         android:layout_width="@dimen/socialNetworkImgSize"
         android:layout_height="@dimen/socialNetworkImgSize"
         android:layout_marginStart="@dimen/socialNetworkStartMargin"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:contentDescription="@string/inbutton"
         android:src="@drawable/ic_in"
         app:layout_constraintStart_toEndOf="@id/imageButtonFacebook"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@id/viewBottom"
+        app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"/>
 
     <ImageButton
         android:id="@+id/imageButtonInstagram"
         android:layout_width="@dimen/socialNetworkImgSize"
         android:layout_height="@dimen/socialNetworkImgSize"
         android:layout_marginStart="@dimen/socialNetworkStartMargin"
-        android:layout_marginTop="@dimen/socialNetworkTopMargin"
         android:background="@drawable/ellipse_3"
         android:contentDescription="@string/instagrambutton"
         android:src="@drawable/ic_instagram"
         app:layout_constraintStart_toEndOf="@id/imageButtonIn"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@id/viewBottom"
+        app:layout_constraintBottom_toTopOf="@id/buttonEditProfile"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonEditProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="@dimen/buttonEditProfileTopMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@drawable/button_border"
         android:fontFamily="@font/opens_sans"
@@ -174,9 +174,11 @@
         android:textColor="@color/greyText"
         android:textSize="@dimen/mediumTextSize"
         android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.75"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+        app:layout_constraintTop_toTopOf="@id/viewBottom"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonViewContacts"

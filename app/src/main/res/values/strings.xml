@@ -8,7 +8,7 @@
     <string name="fill_out_the_profile_and_go_to_the_application">Fill out the profile and go to the application!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="remember_me">Remember me</string>
+    <string name="remember_me"> Remember me</string>
     <string name="register">REGISTER</string>
     <string name="settings">settings</string>
     <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">By clicking Register you agree to our Terms and Conditions</string>
@@ -58,7 +58,23 @@
     <string name="message">MESSAGE</string>
     <string name="profile">Profile</string>
     <string name="contact_name">contact_name</string>
-
+    <string name="your_profile_data">Your profile data</string>
+    <string name="fill_out_the_profile">Fill out the profile and go to the application!</string>
+    <string name="user_name">User name</string>
+    <string name="mobile_phone">Mobile phone</string>
+    <string name="cancel">Cancel</string>
+    <string name="forward">FORWARD</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello">HELLO!</string>
+    <string name="login_instruction">Enter your email and password below</string>
+    <string name="remember_me1">Remember me</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="don_t_have_account">Don`t have account?</string>
+    <string name="users">Users</string>
+    <string name="email_is_already_registered">email is already registered</string>
 
 
 </resources>

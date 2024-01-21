@@ -67,5 +67,9 @@
     <dimen name="checkbox_multiselect_startMargin">8dp</dimen>
     <dimen name="buttonDeleteSelectModeBotMargin">45dp</dimen>
     <dimen name="buttonDeleteSelectModeTopMargin">32dp</dimen>
+    <dimen name="ImageViewUserRegistrationTopMargin">71dp</dimen>
+    <dimen name="ImageViewUserRegistrationSize">113dp</dimen>
+    <dimen name="button_cancel_sign_up">136dp</dimen>
+    <dimen name="searchViewHeight">30dp</dimen>
 
 </resources>

@@ -4,7 +4,7 @@
     <string name="fill_out_the_profile_and_go_to_the_application">Заповнюйте профіль і переходьте до додатку!</string>
     <string name="email">Email</string>
     <string name="password">Пароль</string>
-    <string name="remember_me">Запам\'ятати мене</string>
+    <string name="remember_me"> Запам\'ятати мене</string>
     <string name="register">РЕЄСТРАЦІЯ</string>
     <string name="settings">налаштування</string>
     <string name="adress">Домашня адреса</string>
@@ -44,5 +44,17 @@
     <string name="message">ПОВІДОМЛЕННЯ</string>
     <string name="profile">Профіль</string>
     <string name="contact_name">ім\'я контакту</string>
-
+    <string name="your_profile_data">Інформація профілю</string>
+    <string name="fill_out_the_profile">Заповніть профіль і переходьте до додатку!</string>
+    <string name="user_name">Ім\'я</string>
+    <string name="mobile_phone">Номер телефону</string>
+    <string name="cancel">Відмінити</string>
+    <string name="forward">Вперед</string>
+    <string name="hello">Вітаю!</string>
+    <string name="login_instruction">Введіть ваш пароль та емайл нижче</string>
+    <string name="remember_me1"> Запам\'ятати мене</string>
+    <string name="forgot_your_password">Забули пароль?</string>
+    <string name="login">Вхід</string>
+    <string name="sign_up">Реєстрація</string>
+    <string name="don_t_have_account">Не маєте аккаунту?</string>
 </resources>

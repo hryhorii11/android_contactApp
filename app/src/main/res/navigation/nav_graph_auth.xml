@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_auth"
+    app:startDestination="@id/signInFragment2">
+    <fragment
+        android:id="@+id/signInFragment2"
+        android:name="com.example.myapplication.presentation.ui.auth.fragments.signUp.SignUpFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment2_to_signInExtendedFragment2"
+            app:destination="@id/signInExtendedFragment2"
+            app:popUpTo="@id/signInFragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signInFragment2_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/signInFragment2"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInExtendedFragment2"
+        android:name="com.example.myapplication.presentation.ui.auth.fragments.signUpExtended.SignUpExtendedFragment"
+        android:label="SignInExtendedFragment" >
+        <action
+            android:id="@+id/action_signInExtendedFragment2_to_signInFragment2"
+            app:destination="@id/signInFragment2"
+            app:popUpTo="@+id/signInFragment2"
+            app:popUpToInclusive="false"/>
+        <argument
+            android:name="response"
+            app:argType="com.example.myapplication.data.model.CreateResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplication.presentation.ui.auth.fragments.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signInFragment2"
+            app:destination="@id/signInFragment2"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

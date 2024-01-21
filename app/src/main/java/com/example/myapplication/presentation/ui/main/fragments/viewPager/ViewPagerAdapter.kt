@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.ui.fragments.adapters
+package com.example.myapplication.presentation.ui.main.fragments.viewPager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

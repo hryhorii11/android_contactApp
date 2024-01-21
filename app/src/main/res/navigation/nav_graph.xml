@@ -7,37 +7,33 @@
     app:startDestination="@id/viewPagerFragment">
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.example.myapplication.presentation.ui.fragments.ViewPagerFragment"
+        android:name="com.example.myapplication.presentation.ui.main.fragments.viewPager.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
             android:id="@+id/action_viewPagerFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_addContactFragment"
+            app:destination="@id/addContactFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailViewFragment"
-        android:name="com.example.myapplication.presentation.ui.fragments.DetailViewFragment"
+        android:name="com.example.myapplication.presentation.ui.main.fragments.detailView.DetailViewFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
-        <action
-            android:id="@+id/action_detailViewFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
         <argument
-            android:name="contact_name"
-            android:defaultValue="name"
-            app:argType="string" />
-        <argument
-            android:name="career"
-            app:argType="string"
-            android:defaultValue="career" />
-        <argument
-            android:name="addres"
-            app:argType="string"
-            android:defaultValue="addres" />
-        <argument
-            android:name="photo"
-            app:argType="string" />
+            android:name="contact"
+            app:argType="com.example.myapplication.data.model.Contact" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.example.myapplication.presentation.ui.main.fragments.addContact.AddContactFragment"
+        android:label="AddContactFragment" >
+        <action
+            android:id="@+id/action_addContactFragment_to_detailViewFragment"
+            app:destination="@id/detailViewFragment" />
     </fragment>
 </navigation>
 

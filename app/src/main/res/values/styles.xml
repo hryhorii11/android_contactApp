@@ -33,4 +33,12 @@
         <item name="colorControlActivated">@color/transparentColor</item>
         <item name="controlBackground">@color/transparentColor</item>
     </style>
+
+
+    <style name="AppSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+
+    </style>
+
 </resources>
