@@ -101,12 +101,12 @@ class ContactListFragment : Fragment(), ItemClickListener {
             }
             buttonCloseSearch.setOnClickListener {
                 closeSearchMode()
+                viewModel.search("")
             }
             searchViewContact.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText != null) {
                         viewModel.search(newText)

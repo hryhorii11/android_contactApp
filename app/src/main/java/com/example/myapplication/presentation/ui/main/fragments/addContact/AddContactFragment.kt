@@ -82,7 +82,10 @@ class AddContactFragment : Fragment() {
                 findNavController().popBackStack()
             }
             buttonSearch.setOnClickListener { toSearchMode() }
-            buttonCloseSearch.setOnClickListener { closeSearchMode() }
+            buttonCloseSearch.setOnClickListener {
+                closeSearchMode()
+                viewModel.search("")
+            }
             searchViewContact.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
