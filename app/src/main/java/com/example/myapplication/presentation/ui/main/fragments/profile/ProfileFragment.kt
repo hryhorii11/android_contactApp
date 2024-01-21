@@ -14,25 +14,30 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
-    private lateinit var binding: ProfileFragmentBinding
+    private val binding: ProfileFragmentBinding by lazy {
+        ProfileFragmentBinding.inflate(layoutInflater)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         super.onCreate(savedInstanceState)
-        binding = ProfileFragmentBinding.inflate(layoutInflater)
-        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
-        binding.imageViewUserPhoto.setPhoto("baseline_person_2_24.xml")
-        binding.buttonViewContacts.setOnClickListener {
-            viewPager?.currentItem = 1
-        }
+        setListeners()
         setUserData()
-
         return binding.root
     }
 
+    private fun setListeners() {
+        binding.buttonViewContacts.setOnClickListener {
+            val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+            viewPager?.currentItem = 1
+        }
+    }
+
     private fun setUserData() {
+        binding.imageViewUserPhoto.setPhoto()
         val u: UserFromLogin? =
             requireActivity().intent.getParcelableExtra("user")
         with(binding) {
