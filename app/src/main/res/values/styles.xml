@@ -23,6 +23,14 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="android:background">@color/themeColor</item>
     </style>
-
-
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="controlBackground">@color/themeColor</item>
+    </style>
+    <style name="checkBoxMultiSelectStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/transparentColor</item>
+        <item name="colorControlActivated">@color/transparentColor</item>
+        <item name="controlBackground">@color/transparentColor</item>
+    </style>
 </resources>

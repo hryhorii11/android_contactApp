@@ -5,59 +5,52 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity">
+    tools:context=".presentation.ui.activities.AuthActivity">
 
-    <!-- TODO: minSdk=24 -->
-    <!-- TODO: all views -> appCompatViews (but not View) -->
-    <!-- TODO: id -> NAMING! -->
-    <!-- TODO: all dp/sp -> to dimens -->
-    <!-- TODO: create chains of views (not link all to parent) -->
-    <TextView
-        android:id="@+id/helloTextView"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="@dimen/textViewHelloTopMargin"
         android:fontFamily="@font/opens_sans"
         android:text="@string/let_s_get_acquainted"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="@dimen/SuperBigTextSize"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
         android:fontFamily="@font/opens_sans"
         android:text="@string/fill_out_the_profile_and_go_to_the_application"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/smallText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/helloTextView" />
+        app:layout_constraintTop_toBottomOf="@id/textViewHello" />
 
-
-
-
-    <!-- TODO: hints -> to design! -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_container"
+        android:id="@+id/text_input_layout_email"
         style="@style/edit_text_auth_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="257dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/SuperBigTextSize"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/email_input"
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/textViewInstructions">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_edit_text"
+            android:id="@+id/edittext_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -68,22 +61,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_container"
+        android:id="@+id/text_input_layout_password"
         style="@style/edit_text_auth_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="338dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/SuperBigTextSize"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/password_input"
         app:errorEnabled="true"
         app:expandedHintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_edit_text"
+            android:id="@+id/edittext_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -93,76 +86,110 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- TODO: Checkbox -> to design! -->
-    <CheckBox
-        android:id="@+id/rememberId"
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="411dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/divideElementsMediumMargin"
+        android:button="@drawable/checkbox_selector"
         android:fontFamily="@font/opens_sans"
         android:text="@string/remember_me"
         android:textColor="@color/grey"
         android:textSize="14sp"
+        android:textStyle="bold"
+        android:theme="@style/MyCheckBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_password" />
+
+    <com.example.myapplication.presentation.utils.views.GoogleButtonView
+        android:id="@+id/buttonGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/google"
+        android:textSize="@dimen/BigTextSize"
+        android:fontFamily="@font/opens_sans"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/ButtonGoogleTopMargin"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@drawable/google_button_border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkBoxRemember" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
+        android:textSize="@dimen/biggerTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/registerButton"
+        android:id="@+id/button_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="575dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@drawable/register_button_border"
         android:fontFamily="@font/opens_sans"
         android:text="@string/register"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/BigTextSize"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textViewOr" />
 
-
-    <TextView
-        android:id="@+id/warningLabel"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="646dp"
+        android:layout_marginTop="@dimen/divideElementsMediumMargin"
         android:fontFamily="@font/opens_sans"
         android:gravity="center_horizontal"
         android:text="@string/by_clicking_register_you_agree_to_our_terms_and_conditions"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/smallText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/button_register" />
 
-    <TextView
-        android:id="@+id/signInLabel"
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="686dp"
+
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
         android:fontFamily="@font/opens_sans"
         android:text="@string/already_have_an_account"
         android:textColor="@color/grey"
-        android:textSize="14sp"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/button_signIn"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintEnd_toStartOf="@id/signInLink"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textView_warning" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signInLink"
-        android:layout_width="63dp"
-        android:layout_height="19dp"
-        android:background="@color/trasnparentColor"
+        android:id="@+id/button_signIn"
+        android:layout_width="@dimen/buttonSignInWidth"
+        android:layout_height="@dimen/buttonSignInHeight"
+        android:background="@color/transparentColor"
         android:fontFamily="@font/opens_sans"
         android:text="@string/sign_in"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/signInLabel"
-        app:layout_constraintTop_toTopOf="@id/signInLabel" />
+        app:layout_constraintStart_toEndOf="@id/textView_signIn"
+        app:layout_constraintTop_toTopOf="@id/textView_signIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   tools:context=".presentation.ui.fragments.DetailViewFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/themeColor"
+        app:layout_constraintBottom_toTopOf="@id/viewBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="@dimen/buttonBackSize"
+        android:layout_height="@dimen/buttonBackSize"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:scaleType="centerCrop"
+        android:background="@color/transparentColor"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintTop_toTopOf="@id/textViewProfile"
+        app:layout_constraintBottom_toBottomOf="@id/textViewProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textSize="@dimen/biggerTextSize"
+        android:textStyle="bold"
+        android:fontFamily="@font/opens_sans"
+        android:layout_marginTop="@dimen/textViewProfileTopMargin"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <View
+        android:id="@+id/viewBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTop" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewContactPhoto"
+        android:layout_width="@dimen/contactImageSize"
+        android:layout_height="@dimen/contactImageSize"
+        android:layout_centerInParent="true"
+        android:transitionName="sharedImageFromDetail"
+        android:layout_marginTop="@dimen/contactImageTopMargin"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/baseline_person_2_24" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/throughItemBIgMargin"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/name_name"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/biggerTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewContactPhoto" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewCareer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/throughElementsSmallManager"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/career"
+        android:textColor="@color/grey_text_2"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAddres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/throughItemMediumMargin"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/address"
+        android:textColor="@color/grey_text_2"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCareer" />
+
+
+    <ImageButton
+        android:id="@+id/imageButtonFacebook"
+        android:layout_width="@dimen/socialNetworkImageSize"
+        android:layout_height="@dimen/socialNetworkImageSize"
+        android:layout_marginTop="@dimen/socialNetworkTopMargin"
+        android:background="@drawable/ellipse_3"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintEnd_toEndOf="@id/imageButtonIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+
+    <ImageButton
+        android:id="@+id/imageButtonIn"
+        android:layout_width="@dimen/socialNetworkImageSize"
+        android:layout_height="@dimen/socialNetworkImageSize"
+        android:layout_marginStart="@dimen/socialNetworkMargin"
+        android:layout_marginTop="@dimen/socialNetworkTopMargin"
+        android:background="@drawable/ellipse_3"
+        android:src="@drawable/ic_in"
+        app:layout_constraintStart_toEndOf="@id/imageButtonFacebook"
+        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+
+    <ImageButton
+        android:id="@+id/imageButtonInstagram"
+        android:layout_width="@dimen/socialNetworkImageSize"
+        android:layout_height="@dimen/socialNetworkImageSize"
+        android:layout_marginStart="@dimen/socialNetworkMargin"
+        android:layout_marginTop="@dimen/socialNetworkTopMargin"
+        android:background="@drawable/ellipse_3"
+        android:src="@drawable/ic_instagram"
+        app:layout_constraintStart_toEndOf="@id/imageButtonIn"
+        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMessageProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/buttonMessageTopMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/opens_sans"
+        android:paddingTop="@dimen/standardPadding"
+        android:paddingBottom="@dimen/standardPadding"
+        android:text="@string/message"
+        android:textColor="@color/white"
+        android:textSize="@dimen/bigTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewBottom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

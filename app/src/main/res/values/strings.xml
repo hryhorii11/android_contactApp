@@ -13,9 +13,10 @@
     <string name="settings">settings</string>
     <string name="by_clicking_register_you_agree_to_our_terms_and_conditions">By clicking Register you agree to our Terms and Conditions</string>
 
+    <style name="invalidEmail">Invalid email</style>
 
     <!-- Profile -->
-    <string name="adress">Home adress</string>
+    <string name="adress">Home address</string>
     <string name="career">Career</string>
     <string name="facebookbutton">facebookButton</string>
     <string name="inbutton">inButton</string>
@@ -27,6 +28,37 @@
     <string name="email_input" translatable="false">Email</string>
     <string name="password_input">Password</string>
     <string name="passwordLenghtErrorText">password must be at least %d characters long</string>
+    <string name="log_out">Log Out</string>
+    <string name="name_name">name</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="or">or</string>
+    <string name="google">Google</string>
+
+    <string name="contacts">Contacts</string>
+    <string name="add_contacts">Add contacts</string>
+    <string name="contact_has_been_removed">Contact has been removed</string>
+    <string name="add_contact">Add contact</string>
+    <string name="username">Username</string>
+    <string name="phone">Phone</string>
+    <string name="address">Adress</string>
+    <string name="remove_contact">Contact has been removed</string>
+    <string name="save">Save</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="firstname_lastname">FirstName LastName</string>
+    <string name="careerHint">Career</string>
+    <string name="name_gmail_com" translatable="false">name@gmail.com</string>
+    <string name="number_example" translatable="false">(068)-644-21-04</string>
+    <string name="address_example" translatable="false">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
+    <string name="date_birth_example" translatable="false">11/02/2003</string>
+    <string name="invalid_username_there_must_be_a_first_and_last_name">invalid username, there must be a first and last name</string>
+    <string name="cannot_be_blank">cannot be blank</string>
+    <string name="must_be_10_numbers">must be 10 numbers</string>
+    <string name="incorrect_date">incorrect date</string>
+    <string name="fill_in_all_fields_correctly">fill in all fields correctly</string>
+    <string name="message">MESSAGE</string>
+    <string name="profile">Profile</string>
+    <string name="contact_name">contact_name</string>
+
 
 
 </resources>

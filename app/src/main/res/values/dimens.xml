@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General-->
+    <dimen name="standardPadding">8dp</dimen>
+    <dimen name="horizontalMargin">16dp</dimen>
+    <dimen name="divideElementsSmallMargin">8dp</dimen>
+    <dimen name="divideElementsMediumMargin">16dp</dimen>
+    <dimen name="divideElementsBigMargin">24dp</dimen>
+    <dimen name="smallText">12sp</dimen>
+    <dimen name="mediumTextSize">14sp</dimen>
+    <dimen name="BigTextSize">16sp</dimen>
+    <dimen name="biggerTextSize">18sp</dimen>
+    <dimen name="SuperBigTextSize">24sp</dimen>
+
+    <!--auth -->
+    <dimen name="textViewHelloTopMargin">146dp</dimen>
+    <dimen name="buttonRegisterTopMargin">575dp</dimen>
+    <dimen name="buttonSignInWidth">63dp</dimen>
+    <dimen name="buttonSignInHeight">19dp</dimen>
+
+   <!-- Main-->
+    <dimen name="buttonSettingTopMargin">20.5dp</dimen>
+    <dimen name="buttonLogOutStartMargin">115dp</dimen>
+    <dimen name="buttonLogOutWidth">119dp</dimen>
+    <dimen name="buttonSettingsStartMargin">17dp</dimen>
+    <dimen name="userPhotoSize">113dp</dimen>
+    <dimen name="userPhotoTopMargin">104dp</dimen>
+    <dimen name="socialNetworkImgSize">60dp</dimen>
+    <dimen name="socialNetworkTopMargin">62dp</dimen>
+    <dimen name="socialNetworkStartMargin">32dp</dimen>
+    <dimen name="buttonEditProfileTopMargin">217dp</dimen>
+    <dimen name="ButtonGoogleTopMargin">67dp</dimen>
+
+    <dimen name="viewTopHeight">117dp</dimen>
+    <dimen name="buttonBackSize">24dp</dimen>
+    <dimen name="buttonBackTopMargin">13.5dp</dimen>
+    <dimen name="buttonSearchSize">16dp</dimen>
+    <dimen name="buttonSearchTopMargin">17.5dp</dimen>
+    <dimen name="superBigTextSize">24sp</dimen>
+    <dimen name="textViewContactTopMargin">10dp</dimen>
+    <dimen name="buttonAddTopMargin">73dp</dimen>
+    <dimen name="buttonAddHeight">18.2dp</dimen>
+    <dimen name="recyclerTopMargin">133dp</dimen>
+    <dimen name="cardViewContactHeight">66dp</dimen>
+    <dimen name="cardViewContactBottomMargin">16dp</dimen>
+    <dimen name="cardViewContactCornerRadius">6dp</dimen>
+    <dimen name="imageViewContactStartMargin">8dp</dimen>
+    <dimen name="imageViewContactTopMargin">8dp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
+    <dimen name="buttonBactaddContactTopMargin">20dp</dimen>
+    <dimen name="textViewAddContactTopMargin">20dp</dimen>
+    <dimen name="contactPhotoTopMargin">28dp</dimen>
+    <dimen name="throughItemBIgMargin">24dp</dimen>
+    <dimen name="bigTextSize">16sp</dimen>
+    <dimen name="throughItemMediumMargin">16dp</dimen>
+    <dimen name="scrollViewBottomMargin">36dp</dimen>
+    <dimen name="buttonAddPhotoSize">55dp</dimen>
+    <dimen name="contactImageSize">113dp</dimen>
+    <dimen name="contactImageTopMargin">71dp</dimen>
+    <dimen name="throughElementsSmallManager">8dp</dimen>
+    <dimen name="socialNetworkImageSize">60dp</dimen>
+    <dimen name="socialNetworkMargin">32dp</dimen>
+    <dimen name="buttonMessageTopMargin">273dp</dimen>
+    <dimen name="textViewProfileTopMargin">20dp</dimen>
+    <dimen name="contactImageStartMargin">12dp</dimen>
+    <dimen name="checkbox_multiselect_size">20dp</dimen>
+    <dimen name="checkbox_multiselect_startMargin">8dp</dimen>
+    <dimen name="buttonDeleteSelectModeBotMargin">45dp</dimen>
+    <dimen name="buttonDeleteSelectModeTopMargin">32dp</dimen>
+
+</resources>
