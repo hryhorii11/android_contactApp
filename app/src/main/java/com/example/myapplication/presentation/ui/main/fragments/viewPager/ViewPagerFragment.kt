@@ -36,7 +36,6 @@ class ViewPagerFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ ->
         }.attach()
         setTabText()
-
         return binding.root
     }
 
