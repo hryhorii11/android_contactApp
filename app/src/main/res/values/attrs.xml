@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="GoogleButtonView">
+        <attr name="googleButtonImage" format="reference" />
+        <attr name="googleButtonText" format="string" />
+    </declare-styleable>
+</resources>
