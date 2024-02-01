@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.presentation.utils.ext.setPhoto
 import com.example.myapplication.R
-import com.example.myapplication.data.model.UserFromLogin
+import com.example.myapplication.domain.model.UserFromLogin
 import com.example.myapplication.databinding.ProfileFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 

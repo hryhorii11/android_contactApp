@@ -1,4 +1,4 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -16,7 +16,19 @@ data class User(
     val instagram: String? = null,
     val twitter: String? = null,
     val linkedin: String? = null,
+    val accessToken: String? = null,
+    val refreshToken: String? = null
 ) : Parcelable
+
+data class CurrentUser(
+    val id: Long = 0,
+    val name: String? = null,
+    val phone: String? = null,
+    val address: String? = null,
+    val career: String? = null,
+    val accessToken: String? = null,
+    val refreshToken: String? = null
+)
 
 @Parcelize
 data class UserFromLogin(
@@ -33,7 +45,16 @@ data class UserFromLogin(
     val linkedin: String? = null,
     val image: String? = null,
 ) : Parcelable {
-    fun toContact(): Contact {
-        return Contact(id, name, career, address, image)
-    }
+    fun toContact() =
+        Contact(id, name, career, address, image)
+
+    fun toCurrentUser(accessToken: String?, refreshToken: String?) = CurrentUser(
+        id.toLong(),
+        name,
+        phone,
+        address,
+        career,
+        accessToken,
+        refreshToken
+    )
 }

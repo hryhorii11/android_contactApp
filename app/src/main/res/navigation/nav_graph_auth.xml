@@ -22,16 +22,7 @@
     <fragment
         android:id="@+id/signInExtendedFragment2"
         android:name="com.example.myapplication.presentation.ui.auth.fragments.signUpExtended.SignUpExtendedFragment"
-        android:label="SignInExtendedFragment" >
-        <action
-            android:id="@+id/action_signInExtendedFragment2_to_signInFragment2"
-            app:destination="@id/signInFragment2"
-            app:popUpTo="@+id/signInFragment2"
-            app:popUpToInclusive="false"/>
-        <argument
-            android:name="response"
-            app:argType="com.example.myapplication.data.model.CreateResponse" />
-    </fragment>
+        android:label="SignInExtendedFragment" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.myapplication.presentation.ui.auth.fragments.login.LoginFragment"

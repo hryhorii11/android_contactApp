@@ -1,4 +1,4 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.domain.model
 
 data class EditResponse(
     val status: String,
@@ -33,7 +33,11 @@ data class GetContactsResponse(
 
 data class Contacts(
     val contacts: List<UserFromLogin>?
-)
+){
+    fun toUi(): List<Contact> {
+        return contacts?.map { it.toContact() }!!
+    }
+}
 
 data class GetUsersResponse(
     val code: Int,
@@ -44,4 +48,8 @@ data class GetUsersResponse(
 
 data class Users(
     val users: List<UserFromLogin>?
-)
+){
+    fun toUi(): List<Contact> {
+        return users?.map { it.toContact() }!!
+    }
+}

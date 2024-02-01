@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
@@ -17,20 +16,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.presentation.utils.SwipeToDeleteCallback
 import com.example.myapplication.databinding.FragmentContactListBinding
-import com.example.myapplication.data.model.Contact
-import com.example.myapplication.data.model.UserFromLogin
+import com.example.myapplication.domain.model.Contact
+import com.example.myapplication.presentation.ui.BaseFragment
 import com.example.myapplication.presentation.ui.main.fragments.viewPager.ViewPagerFragmentDirections
+import com.example.myapplication.presentation.utils.ext.hide
+import com.example.myapplication.presentation.utils.ext.show
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContactListFragment : Fragment(), ItemClickListener {
-    private lateinit var binding: FragmentContactListBinding
+class ContactListFragment :
+    BaseFragment<ContactListViewModel>(R.layout.fragment_contact_list),
+    ItemClickListener {
+
     private lateinit var adapter: ContactAdapter
     private var itemTouchHelper: ItemTouchHelper? = null
-
-
-    private val viewModel: ContactListViewModel by viewModels()
+    override val viewModel: ContactListViewModel by viewModels()
+    private val binding: FragmentContactListBinding by lazy {
+        FragmentContactListBinding.inflate(
+            layoutInflater
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,29 +44,33 @@ class ContactListFragment : Fragment(), ItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         super.onCreate(savedInstanceState)
-        binding = FragmentContactListBinding.inflate(layoutInflater)
+
         setListeners()
 
         adapter = ContactAdapter(this)
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
         setTouchHelper()
+        setObservers()
+        setUsers()
 
-
-        viewModel.contacts.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(this@ContactListFragment.context, it, Toast.LENGTH_SHORT).show()
-        }
-
-        val u: UserFromLogin? = requireActivity().intent.getParcelableExtra("user")
-        if (u != null) {
-            viewModel.setUsers(
-                requireActivity().intent.getStringExtra("token"), u.id
-            )
-        }
         return binding.root
+    }
+
+    private fun setUsers() {
+        viewModel.setUsers()
+    }
+
+    private fun setObservers() {
+
+        viewModel.contacts.collectUIState(
+            onError = {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            },
+            onSuccess = {
+                adapter.submitList(it)
+            }
+        )
     }
 
     private fun setTouchHelper() {
@@ -87,13 +97,7 @@ class ContactListFragment : Fragment(), ItemClickListener {
         with(binding) {
             buttonAddContact.setOnClickListener { showAddContactDialog() }
             buttonDeleteSelectMode.setOnClickListener {
-                val u: UserFromLogin? = requireActivity().intent.getParcelableExtra("user")
-                requireActivity().intent.getStringExtra("token")
-                    ?.let {
-                        if (u != null) {
-                            viewModel.deleteSelectedContacts(it, u.id)
-                        }
-                    }
+                viewModel.deleteSelectedContacts()
                 onContactChangeMode()
             }
             buttonSearch.setOnClickListener {
@@ -107,6 +111,7 @@ class ContactListFragment : Fragment(), ItemClickListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
                 }
+
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText != null) {
                         viewModel.search(newText)
@@ -120,34 +125,28 @@ class ContactListFragment : Fragment(), ItemClickListener {
     private fun closeSearchMode() {
         with(binding)
         {
-            buttonSearch.visibility = View.VISIBLE
-            buttonBack.visibility = View.VISIBLE
-            textViewContacts.visibility = View.VISIBLE
-            searchViewContact.visibility = View.GONE
-            buttonCloseSearch.visibility = View.GONE
+            buttonSearch.show()
+            buttonBack.show()
+            textViewContacts.hide()
+            searchViewContact.hide()
+            buttonCloseSearch.hide()
         }
     }
 
     private fun toSearchMode() {
         with(binding)
         {
-            buttonSearch.visibility = View.GONE
-            buttonBack.visibility = View.GONE
-            textViewContacts.visibility = View.GONE
-            searchViewContact.visibility = View.VISIBLE
-            buttonCloseSearch.visibility = View.VISIBLE
+            buttonSearch.hide()
+            buttonBack.hide()
+            textViewContacts.hide()
+            searchViewContact.show()
+            buttonCloseSearch.show()
         }
     }
 
     private fun showAddContactDialog() {
-//        if (!isNavigating) {
-//            isNavigating = true
         findNavController().navigate(ViewPagerFragmentDirections.actionViewPagerFragmentToAddContactFragment())
-//            Handler().postDelayed(
-//                { isNavigating = false },
-//                1000
-//            )
-//        }
+
     }
 
     override fun onContactClick(contact: Contact, extras: Navigator.Extras) {
@@ -190,15 +189,9 @@ class ContactListFragment : Fragment(), ItemClickListener {
     }
 
     override fun onContactDelete(contact: Contact) {
-        val u: UserFromLogin? = requireActivity().intent.getParcelableExtra("user")
         if (adapter.currentList.contains(contact))
             showSnackBar()
-        requireActivity().intent.getStringExtra("token")
-            ?.let {
-                if (u != null) {
-                    viewModel.deleteContact(contact, u.id, it)
-                }
-            }
+        viewModel.deleteContact(contact)
     }
 
     private fun showSnackBar() {
@@ -207,14 +200,8 @@ class ContactListFragment : Fragment(), ItemClickListener {
                 binding.root,
                 getString(R.string.remove_contact), Snackbar.LENGTH_LONG
             )
-        snackBar.setAction("cancel") {
-            val u: UserFromLogin? = requireActivity().intent.getParcelableExtra("user")
-            requireActivity().intent.getStringExtra("token")
-                ?.let {
-                    if (u != null) {
-                        viewModel.returnContact(u.id, it)
-                    }
-                }
+        snackBar.setAction(R.string.cancel) {
+            viewModel.returnDeletedContact()
         }
         snackBar.show()
     }

@@ -1,4 +1,4 @@
-package com.example.myapplication.data.retrofit
+package com.example.myapplication.di
 
 import com.example.myapplication.data.api.UserApi
 import dagger.Module
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+class RetrofitModule {
     @Provides
     @Singleton
     fun provideClient():OkHttpClient=OkHttpClient.Builder()
@@ -38,7 +38,5 @@ class AppModule {
     @Singleton
     fun provideMainService(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
-    @Provides
-    @Singleton
-    fun provideUserRemoteData(mainService: UserApi): UserRemoteData = UserRemoteData(mainService)
+
 }

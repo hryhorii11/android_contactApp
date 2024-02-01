@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="contact"
-            app:argType="com.example.myapplication.data.model.Contact" />
+            app:argType="com.example.myapplication.domain.model.Contact" />
 
     </fragment>
     <fragment

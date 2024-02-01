@@ -1,13 +1,13 @@
 package com.example.myapplication.data.api
 
-import com.example.myapplication.data.model.AddContactBody
-import com.example.myapplication.data.model.GetContactsResponse
-import com.example.myapplication.data.model.GetUsersResponse
-import com.example.myapplication.data.model.LoginData
-import com.example.myapplication.data.model.User
-import com.example.myapplication.data.model.UserRegisterResponse
-import com.example.myapplication.data.model.EditBody
-import com.example.myapplication.data.model.EditResponse
+import com.example.myapplication.domain.model.AddContactBody
+import com.example.myapplication.domain.model.GetContactsResponse
+import com.example.myapplication.domain.model.GetUsersResponse
+import com.example.myapplication.domain.model.LoginData
+import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.model.UserRegisterResponse
+import com.example.myapplication.domain.model.EditBody
+import com.example.myapplication.domain.model.EditResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -49,7 +49,7 @@ interface UserApi {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int,
         @Body body: AddContactBody
-    )
+    ):GetContactsResponse
 
     @Headers("Content-type: application/json")
     @DELETE("users/{userId}/contacts/{contactId}")
@@ -57,5 +57,5 @@ interface UserApi {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int,
         @Path("contactId") contactId: Int,
-    )
+    ):GetContactsResponse
 }

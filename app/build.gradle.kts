@@ -48,6 +48,9 @@ dependencies {
     // core
     implementation("androidx.core:core-ktx:1.12.0")
 
+    // Javax Inject
+    api("javax.inject:javax.inject:1")
+
     // UI
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
