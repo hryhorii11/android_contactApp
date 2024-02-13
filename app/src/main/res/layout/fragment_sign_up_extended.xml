@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.auth.fragments.signUpExtended.SignUpExtendedFragment"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/themeColor"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ImageViewUserRegistration"
+        android:layout_width="@dimen/ImageViewUserRegistrationSize"
+        android:layout_height="@dimen/ImageViewUserRegistrationSize"
+        android:src="@drawable/vector__3_"
+        app:layout_constraintVertical_bias="0.15"
+        android:scaleType="center"
+        android:background="@drawable/ic_user_registration_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/buttonAddPhoto"
+        android:layout_width="@dimen/buttonAddPhotoSize"
+        android:layout_height="@dimen/buttonAddPhotoSize"
+        android:layout_marginStart="@dimen/throughItemBIgMargin"
+        android:src="@drawable/ic_add_photo"
+        app:layout_constraintBottom_toBottomOf="@id/ImageViewUserRegistration"
+        app:layout_constraintStart_toEndOf="@id/ImageViewUserRegistration"
+        app:layout_constraintTop_toTopOf="@id/ImageViewUserRegistration" />
+    <TextView
+        android:id="@+id/textViewYourProfileData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/your_profile_data"
+        android:textColor="@color/white"
+        android:fontFamily="@font/opens_sans"
+        android:textSize="@dimen/SuperBigTextSize"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/divideElementsBigMargin"
+        app:layout_constraintTop_toBottomOf="@id/ImageViewUserRegistration"
+        />
+    <TextView
+        android:id="@+id/textViewRegistrationInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/fill_out_the_profile"
+        android:textColor="@color/white"
+        android:fontFamily="@font/opens_sans"
+        android:textSize="@dimen/smallText"
+        android:textStyle="normal"
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
+        app:layout_constraintTop_toBottomOf="@id/textViewYourProfileData"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_userName"
+        style="@style/edit_text_auth_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/SuperBigTextSize"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:hint="@string/user_name"
+        app:errorEnabled="true"
+        app:expandedHintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRegistrationInstruction">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:textColor="@color/white"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_phone"
+        style="@style/edit_text_auth_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/SuperBigTextSize"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:hint="@string/mobile_phone"
+        app:errorEnabled="true"
+        app:expandedHintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_userName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/white"
+            tools:ignore="TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_cancel_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@drawable/logout_button_border"
+        android:fontFamily="@font/opens_sans"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+/>
+    <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/buttonForward"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/horizontalMargin"
+          android:layout_marginEnd="@dimen/horizontalMargin"
+          android:layout_marginTop="@dimen/divideElementsMediumMargin"
+          android:text="@string/forward"
+          android:background="@color/orange"
+          android:textColor="@color/white"
+          android:textSize="@dimen/bigTextSize"
+          app:layout_constraintTop_toBottomOf="@id/button_cancel_sign_up"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          />
+</androidx.constraintlayout.widget.ConstraintLayout>

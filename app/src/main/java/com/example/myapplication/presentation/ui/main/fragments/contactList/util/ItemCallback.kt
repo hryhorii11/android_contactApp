@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.ui.fragments.adapters.util
+package com.example.myapplication.presentation.ui.main.fragments.contactList.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.myapplication.data.model.Contact

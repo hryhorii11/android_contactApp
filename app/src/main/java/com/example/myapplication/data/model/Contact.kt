@@ -1,12 +1,13 @@
 package com.example.myapplication.data.model
 
-import java.util.UUID
-
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+@Parcelize
 data class Contact(
-    val name: String,
-    val career: String,
-    val address:String,
-    val photo: String,
+    val id:Int,
+    val name: String?="",
+    val career: String?="",
+    val address:String?="",
+    val photo: String?="",
     val isChecked:Boolean=false,
-    val id: UUID = UUID.randomUUID()
-)
+):Parcelable

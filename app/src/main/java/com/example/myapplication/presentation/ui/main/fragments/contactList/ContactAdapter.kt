@@ -1,6 +1,5 @@
-package com.example.myapplication.presentation.ui.fragments.adapters
+package com.example.myapplication.presentation.ui.main.fragments.contactList
 
-import com.example.myapplication.presentation.ui.fragments.interfaces.ItemClickListener
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Contact
 import com.example.myapplication.databinding.UserItemBinding
-import com.example.myapplication.presentation.ui.fragments.adapters.util.ItemCallback
+import com.example.myapplication.presentation.ui.main.fragments.contactList.util.ItemCallback
 import com.example.myapplication.presentation.utils.ext.setPhoto
 
 
@@ -46,10 +45,11 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
                 }
                 textViewContactName.text = contact.name
                 textViewContactCareer.text = contact.career
-                imageViewContactPhoto.setPhoto(contact.photo)
+                contact.photo?.let { imageViewContactPhoto.setPhoto(it) }
             }
             setListeners(contact)
         }
+
         private fun setListeners(contact: Contact) {
             val extras =
                 FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail")
@@ -64,16 +64,15 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
                     itemClickListener.onCheckBoxClick(contact)
                 }
                 cardViewItem.setOnLongClickListener {
-                    if(!isSelectionMode) {
+                    if (!isSelectionMode) {
                         itemClickListener.onContactChangeMode()
-                        itemClickListener.togleSelect(contact)
+                        itemClickListener.toggleSelect(contact)
                     }
                     true
                 }
                 buttonDeleteUser.setOnClickListener {
-                    itemClickListener.onContactDelete(
-                        contact
-                    )
+                    if (currentList.indexOf(contact) != -1)
+                        itemClickListener.onContactDelete(contact)
                 }
             }
         }
@@ -95,14 +94,6 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
         isSelectionMode = !isSelectionMode
         notifyDataSetChanged()
     }
-
-
-    fun toggleSelection(position: Int) {
-        //notifyItemChanged(position)
-        if (currentList.none { it.isChecked })
-            changeMode()
-    }
-
 
 }
 

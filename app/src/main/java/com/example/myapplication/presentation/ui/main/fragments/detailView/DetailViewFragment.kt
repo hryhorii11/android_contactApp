@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.ui.fragments
+package com.example.myapplication.presentation.ui.main.fragments.detailView
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.presentation.utils.ext.setPhoto
 import com.example.myapplication.databinding.FragmentDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailViewFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val args: DetailViewFragmentArgs by navArgs()
@@ -20,14 +22,11 @@ class DetailViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreate(savedInstanceState)
-
         sharedElementEnterTransition = TransitionInflater.from(requireContext())
             .inflateTransition(android.R.transition.slide_left)
-
         binding = FragmentDetailBinding.inflate(layoutInflater)
         setData()
         setListeners()
-
         return binding.root
     }
 
@@ -38,17 +37,17 @@ class DetailViewFragment : Fragment() {
     private fun setData() {
         with(binding)
         {
-            textViewName.text=args.contactName
-            textViewCareer.text=args.career
-            textViewAddres.text=args.addres
-            imageViewContactPhoto.setPhoto(args.photo)
+            textViewName.text = args.contact.name
+            textViewCareer.text = args.contact.career
+            textViewAddres.text = args.contact.address
+            if (args.contact.photo != null)
+                imageViewContactPhoto.setPhoto(args.contact.photo!!)
         }
     }
 
-    private fun close()
-     {
-         val fragmentManager = requireActivity().supportFragmentManager
-         fragmentManager.popBackStack()
-     }
+    private fun close() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.popBackStack()
+    }
 
 }

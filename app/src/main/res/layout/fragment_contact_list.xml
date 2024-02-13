@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.ui.fragments.ContactListFragment">
+    tools:context=".presentation.ui.main.fragments.contactList.ContactListFragment">
+
 
     <View
         android:id="@+id/viewTop"
@@ -13,68 +14,98 @@
         android:layout_height="@dimen/viewTopHeight"
         android:background="@color/themeColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView_contact"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/searchViewHeight"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/divideElementsSmallMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@color/greyText"
+        style="@style/AppSearchViewStyle"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/button_close_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_close_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@color/transparentColor"
+        android:src="@drawable/ic_close"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/searchView_contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchView_contact" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_back"
         android:layout_width="@dimen/buttonBackSize"
         android:layout_height="@dimen/buttonBackSize"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginTop="@dimen/buttonBackTopMargin"
-        android:scaleType="centerCrop"
         android:background="@color/transparentColor"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_back_button"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_search"
         android:layout_width="@dimen/buttonSearchSize"
         android:layout_height="@dimen/buttonSearchSize"
-        android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginTop="@dimen/buttonSearchTopMargin"
-        android:scaleType="centerCrop"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@color/transparentColor"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_search_button"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_contacts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/contacts"
-        android:textSize="@dimen/superBigTextSize"
         android:layout_marginTop="@dimen/textViewContactTopMargin"
-        android:textColor="@color/white"
         android:fontFamily="@font/opens_sans"
+        android:text="@string/contacts"
+        android:textColor="@color/white"
+        android:textSize="@dimen/superBigTextSize"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonAddContact"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/buttonAddHeight"
-        android:text="@string/add_contacts"
-        android:layout_marginTop="@dimen/buttonAddTopMargin"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:textSize="@dimen/mediumTextSize"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/buttonAddTopMargin"
         android:background="@color/transparentColor"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/add_contacts"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/mediumTextSize"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/divideElementsMediumMargin"
-        tools:listitem="@layout/user_item"
-        app:layout_constraintTop_toBottomOf="@id/viewTop"
         app:layout_constraintBottom_toTopOf="@id/buttonDeleteSelectMode"
-        />
+        app:layout_constraintTop_toBottomOf="@id/viewTop"
+        tools:listitem="@layout/user_item" />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/buttonDeleteSelectMode"
         android:layout_width="wrap_content"
@@ -82,13 +113,12 @@
         android:layout_marginTop="@dimen/buttonDeleteSelectModeTopMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginBottom="@dimen/buttonDeleteSelectModeBotMargin"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/transparentColor"
         android:src="@drawable/ic_delete_selrctmode"
-        app:layout_constraintTop_toBottomOf="@id/recycler"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
