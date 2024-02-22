@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
@@ -13,15 +12,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.presentation.utils.SwipeToDeleteCallback
 import com.example.myapplication.databinding.FragmentContactListBinding
 import com.example.myapplication.domain.model.Contact
+import com.example.myapplication.notification.Data
+import com.example.myapplication.notification.NotificationModel
 import com.example.myapplication.presentation.ui.BaseFragment
 import com.example.myapplication.presentation.ui.main.fragments.viewPager.ViewPagerFragmentDirections
-import com.example.myapplication.presentation.utils.ext.hide
-import com.example.myapplication.presentation.utils.ext.show
+import com.example.myapplication.presentation.utils.Constants.DEEP_LINK_URI
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,14 +48,12 @@ class ContactListFragment :
         super.onCreate(savedInstanceState)
 
         setListeners()
-
         adapter = ContactAdapter(this)
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
         setTouchHelper()
         setObservers()
         setUsers()
-
         return binding.root
     }
 
@@ -71,6 +71,8 @@ class ContactListFragment :
                 adapter.submitList(it)
             }
         )
+
+
     }
 
     private fun setTouchHelper() {
@@ -101,46 +103,31 @@ class ContactListFragment :
                 onContactChangeMode()
             }
             buttonSearch.setOnClickListener {
-                toSearchMode()
-            }
-            buttonCloseSearch.setOnClickListener {
-                closeSearchMode()
-                viewModel.search("")
-            }
-            searchViewContact.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
+                sendSearchNotification()
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if (newText != null) {
-                        viewModel.search(newText)
-                    }
-                    return true
-                }
-            })
+            }
+            buttonBack.setOnClickListener{
+                val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+                viewPager?.currentItem = 0
+            }
+
         }
     }
 
-    private fun closeSearchMode() {
-        with(binding)
-        {
-            buttonSearch.show()
-            buttonBack.show()
-            textViewContacts.hide()
-            searchViewContact.hide()
-            buttonCloseSearch.hide()
-        }
-    }
 
-    private fun toSearchMode() {
-        with(binding)
-        {
-            buttonSearch.hide()
-            buttonBack.hide()
-            textViewContacts.hide()
-            searchViewContact.show()
-            buttonCloseSearch.show()
+    private fun sendSearchNotification() {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+            viewModel
+                .sendNotification(
+                    NotificationModel(
+                        token,
+                        Data(
+                            getString(R.string.search_notification_title),
+                            getString(R.string.search_notification_message),
+                            DEEP_LINK_URI
+                        )
+                    )
+                )
         }
     }
 

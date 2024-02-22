@@ -75,6 +75,10 @@
     <string name="don_t_have_account">Don`t have account?</string>
     <string name="users">Users</string>
     <string name="email_is_already_registered">email is already registered</string>
+    <string name="search">Search</string>
+    <string name="search_notification_title">Search contacts</string>
+    <string name="search_notification_message">Push the search button to go to search view</string>
+    <string name="network_error">network error</string>
 
 
 </resources>

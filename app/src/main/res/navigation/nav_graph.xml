@@ -30,10 +30,13 @@
     <fragment
         android:id="@+id/addContactFragment"
         android:name="com.example.myapplication.presentation.ui.main.fragments.addContact.AddContactFragment"
-        android:label="AddContactFragment" >
+        android:label="AddContactFragment">
         <action
             android:id="@+id/action_addContactFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="app://www.contacts.com" />
     </fragment>
 </navigation>
 

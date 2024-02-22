@@ -17,31 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView_contact"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/searchViewHeight"
-        android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="@dimen/divideElementsSmallMargin"
-        android:layout_marginEnd="@dimen/horizontalMargin"
-        android:background="@color/greyText"
-        style="@style/AppSearchViewStyle"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/button_close_search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_close_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/horizontalMargin"
-        android:background="@color/transparentColor"
-        android:src="@drawable/ic_close"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/searchView_contact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchView_contact" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/button_back"

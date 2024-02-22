@@ -56,7 +56,6 @@
         android:layout_width="@dimen/buttonLogOutWidth"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/horizontalMargin"
-        android:layout_marginStart="@dimen/buttonLogOutStartMargin"
         android:layout_marginTop="@dimen/divideElementsMediumMargin"
         android:background="@drawable/logout_button_border"
         android:paddingTop="8dp"

@@ -12,8 +12,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.myapplication.R
-import com.example.myapplication.domain.model.User
 import com.example.myapplication.databinding.FragmentSignUpBinding
+import com.example.myapplication.domain.model.User
 import com.example.myapplication.presentation.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +48,7 @@ class SignUpFragment : BaseFragment<SignUpViewModel>(R.layout.fragment_sign_up) 
                 ).show()
             },
             onSuccess = {
+                viewModel.setAuthorizeState()
                 Navigation.findNavController(requireView())
                     .navigate(
                         SignUpFragmentDirections.actionSignInFragment2ToSignInExtendedFragment2(

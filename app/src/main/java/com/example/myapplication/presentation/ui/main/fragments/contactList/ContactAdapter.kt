@@ -18,7 +18,6 @@ import com.example.myapplication.presentation.utils.ext.setPhoto
 class ContactAdapter(private val itemClickListener: ItemClickListener) :
     ListAdapter<Contact, ContactAdapter.ContactHolder>(ItemCallback) {
     var isSelectionMode = false
-
     inner class ContactHolder(private val binding: UserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
@@ -49,7 +48,6 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
             }
             setListeners(contact)
         }
-
         private fun setListeners(contact: Contact) {
             val extras =
                 FragmentNavigatorExtras(binding.imageViewContactPhoto to "sharedImageFromDetail")
@@ -77,18 +75,15 @@ class ContactAdapter(private val itemClickListener: ItemClickListener) :
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = UserItemBinding.inflate(inflater, parent, false)
 
         return ContactHolder(binding)
     }
-
     override fun onBindViewHolder(holder: ContactHolder, position: Int) {
         holder.bind(currentList[position])
     }
-
     @SuppressLint("NotifyDataSetChanged")
     fun changeMode() {
         isSelectionMode = !isSelectionMode

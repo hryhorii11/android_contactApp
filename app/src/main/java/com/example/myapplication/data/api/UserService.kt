@@ -1,13 +1,15 @@
 package com.example.myapplication.data.api
 
 import com.example.myapplication.domain.model.AddContactBody
-import com.example.myapplication.domain.model.GetContactsResponse
-import com.example.myapplication.domain.model.GetUsersResponse
+import com.example.myapplication.domain.model.Contacts
 import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.User
-import com.example.myapplication.domain.model.UserRegisterResponse
 import com.example.myapplication.domain.model.EditBody
-import com.example.myapplication.domain.model.EditResponse
+import com.example.myapplication.domain.model.EditUserResponseData
+import com.example.myapplication.domain.model.RefreshTokenResponse
+import com.example.myapplication.domain.model.RegisterData
+import com.example.myapplication.domain.model.Response
+import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.model.Users
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -17,11 +19,11 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface UserApi {
+interface UserService {
     @POST("users")
     suspend fun registerUser(
         @Body user: User
-    ): UserRegisterResponse
+    ): Response<RegisterData>
 
     @Headers("Content-type: application/json")
     @PUT("users/{userId}")
@@ -29,19 +31,19 @@ interface UserApi {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int,
         @Body editBody: EditBody
-    ): EditResponse
+    ): Response<EditUserResponseData>
 
     @POST("login")
-    suspend fun loginUser(@Body loginData: LoginData): UserRegisterResponse
+    suspend fun loginUser(@Body loginData: LoginData): Response<RegisterData>
 
     @GET("users/{userId}/contacts")
     suspend fun getUserContacts(
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int
-    ): GetContactsResponse
+    ): Response<Contacts>
 
     @GET("users")
-    suspend fun getAllUsers(@Header("Authorization") accessToken: String): GetUsersResponse
+    suspend fun getAllUsers(@Header("Authorization") accessToken: String): Response<Users>
 
     @Headers("Content-type: application/json")
     @PUT("users/{userId}/contacts")
@@ -49,7 +51,7 @@ interface UserApi {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int,
         @Body body: AddContactBody
-    ):GetContactsResponse
+    ): Response<Contacts>
 
     @Headers("Content-type: application/json")
     @DELETE("users/{userId}/contacts/{contactId}")
@@ -57,5 +59,8 @@ interface UserApi {
         @Header("Authorization") accessToken: String,
         @Path("userId") userId: Int,
         @Path("contactId") contactId: Int,
-    ):GetContactsResponse
+    ): Response<Contacts>
+
+    @POST("refresh")
+    suspend fun refreshToken(@Header("RefreshToken") refreshToken: String): Response<RefreshTokenResponse>
 }

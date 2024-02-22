@@ -45,7 +45,7 @@ class SignUpExtendedFragment :
 
         viewModel.user.collectUIState(
             onError = {
-                Toast.makeText(this.context, it, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, "it", Toast.LENGTH_LONG).show()
 
             },
             onSuccess = {

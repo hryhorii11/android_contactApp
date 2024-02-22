@@ -5,6 +5,7 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -72,12 +73,25 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     //interceptor
-    implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
-    implementation("com.squareup.okhttp3:okhttp:4.7.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt ("com.google.dagger:hilt-android-compiler:2.48")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation("com.google.firebase:firebase-messaging")
+
+    //room
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+    //datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
 kapt {
     correctErrorTypes = true

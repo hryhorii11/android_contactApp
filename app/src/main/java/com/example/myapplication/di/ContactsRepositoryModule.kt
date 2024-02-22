@@ -1,8 +1,9 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.data.api.UserApi
-import com.example.myapplication.data.repository.contacts.ContactsRepository
-import com.example.myapplication.data.repository.contacts.ContactsRepositoryImpl
+import com.example.myapplication.data.api.UserService
+import com.example.myapplication.data.contacts.repository.ContactsRepository
+import com.example.myapplication.data.contacts.repository.ContactsRepositoryImpl
+import com.example.myapplication.data.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 class ContactsRepositoryModule {
     @Provides
     @Singleton
-    fun provideUsersContactsRepository(mainService: UserApi): ContactsRepository=ContactsRepositoryImpl(mainService)
+    fun provideUsersContactsRepository(mainService: UserService, db:AppDatabase): ContactsRepository =
+        ContactsRepositoryImpl(mainService,db)
 
 }

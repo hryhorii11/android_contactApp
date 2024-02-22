@@ -23,6 +23,7 @@ data class User(
 data class CurrentUser(
     val id: Long = 0,
     val name: String? = null,
+    val email: String,
     val phone: String? = null,
     val address: String? = null,
     val career: String? = null,
@@ -34,7 +35,7 @@ data class CurrentUser(
 data class UserFromLogin(
     val id: Int,
     val name: String? = null,
-    val email: String?,
+    val email: String,
     val phone: String? = null,
     val address: String? = null,
     val career: String? = null,
@@ -51,6 +52,7 @@ data class UserFromLogin(
     fun toCurrentUser(accessToken: String?, refreshToken: String?) = CurrentUser(
         id.toLong(),
         name,
+        email,
         phone,
         address,
         career,

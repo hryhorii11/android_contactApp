@@ -57,4 +57,10 @@
     <string name="login">Вхід</string>
     <string name="sign_up">Реєстрація</string>
     <string name="don_t_have_account">Не маєте аккаунту?</string>
+    <string name="users">Користувачі</string>
+    <string name="email_is_already_registered">Користувач з таким емайлом вже існує</string>
+    <string name="search">Пошук</string>
+    <string name="search_notification_title">Пошук контактів</string>
+    <string name="search_notification_message">Нажміть кнопку пошуку, для переходу до пошуку контактів</string>
+    <string name="network_error">помилка мережі</string>
 </resources>

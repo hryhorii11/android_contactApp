@@ -2,7 +2,7 @@ package com.example.myapplication.presentation.ui.main.fragments.addContact
 
 
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.repository.contacts.ContactsRepository
+import com.example.myapplication.data.contacts.repository.ContactsRepository
 import com.example.myapplication.domain.model.AddContactBody
 import com.example.myapplication.domain.model.Contact
 import com.example.myapplication.domain.UIState
