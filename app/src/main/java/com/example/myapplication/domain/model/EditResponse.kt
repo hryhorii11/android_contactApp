@@ -1,16 +1,9 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.domain.model
 
-data class EditResponse(
-    val status: String,
-    val code: Int,
-    val message: String,
-    val data: EditUserResponse
-)
 
-data class EditUserResponse(
+data class EditUserResponseData(
     val user: UserFromLogin
 )
-
 data class EditBody(
     val name: String? = null,
     val phone: String? = null,
@@ -24,24 +17,17 @@ data class EditBody(
     val image: String? = null
 )
 
-data class GetContactsResponse(
-    val code: Int,
-    val data: Contacts,
-    val message: String,
-    val status: String
-)
-
 data class Contacts(
     val contacts: List<UserFromLogin>?
-)
-
-data class GetUsersResponse(
-    val code: Int,
-    val data: Users,
-    val message: String,
-    val status: String
-)
-
+){
+    fun toUi(): List<Contact> {
+        return contacts?.map { it.toContact() }!!
+    }
+}
 data class Users(
     val users: List<UserFromLogin>?
-)
+){
+    fun toUi(): List<Contact> {
+        return users?.map { it.toContact() }!!
+    }
+}

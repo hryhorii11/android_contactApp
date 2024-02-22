@@ -1,6 +1,6 @@
-package com.example.myapplication.data.retrofit
+package com.example.myapplication.di
 
-import com.example.myapplication.data.api.UserApi
+import com.example.myapplication.data.api.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,11 +9,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+class RetrofitModule {
     @Provides
     @Singleton
     fun provideClient():OkHttpClient=OkHttpClient.Builder()
@@ -27,6 +28,7 @@ class AppModule {
     }
 
     @Provides
+    @Named("Retrofit1")
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(client)
@@ -36,9 +38,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideMainService(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
+    fun provideMainService(@Named("Retrofit1") retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideUserRemoteData(mainService: UserApi): UserRemoteData = UserRemoteData(mainService)
 }

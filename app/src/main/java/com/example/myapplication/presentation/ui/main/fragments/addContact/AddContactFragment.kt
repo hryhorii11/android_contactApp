@@ -4,66 +4,60 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.data.model.Contact
-import com.example.myapplication.data.model.UserFromLogin
+import com.example.myapplication.R
+import com.example.myapplication.domain.model.Contact
 import com.example.myapplication.databinding.FragmentAddContactBinding
+import com.example.myapplication.presentation.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddContactFragment : Fragment() {
+class AddContactFragment : BaseFragment<AddContactViewModel>(R.layout.fragment_add_contact) {
     private val binding: FragmentAddContactBinding by lazy {
         FragmentAddContactBinding.inflate(
             layoutInflater
         )
     }
     private lateinit var adapter: AddContactAdapter
-    private val viewModel: AddContactViewModel by viewModels()
+    override val viewModel: AddContactViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         setListeners()
-        val user: UserFromLogin? = requireActivity().intent.getParcelableExtra("user")
-        setRecyclerAdapter(user)
-
+        setRecyclerAdapter()
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
-
-
-        viewModel.contacts.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        viewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.progressDialog.visibility = View.VISIBLE
-            } else {
-                binding.progressDialog.visibility = View.GONE
-            }
-        }
-        requireActivity().intent.getStringExtra("token")?.let {
-            if (user != null) {
-                viewModel.setContacts(it, user.id)
-            }
-        }
+        setObservers()
+        viewModel.setContacts()
         return binding.root
     }
 
-    private fun setRecyclerAdapter(user: UserFromLogin?) {
+    private fun setObservers() {
+        viewModel.contacts.collectUIState(
+            onError = {
+                binding.progressDialog.visibility = View.GONE
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            },
+            onSuccess = {
+                binding.progressDialog.visibility = View.GONE
+                adapter.submitList(it)
+            },
+            onLoading = {
+                binding.progressDialog.visibility = View.VISIBLE
+            }
+        )
+    }
+
+    private fun setRecyclerAdapter() {
         adapter = AddContactAdapter(object : AddClickListener {
             override fun addContact(id: Int) {
-                requireActivity().intent.getStringExtra("token")
-                    ?.let {
-                        if (user != null) {
-                            viewModel.addContact(it, id, user.id)
-                        }
-                    }
+                viewModel.addContact(id)
             }
 
             override fun onItemClick(contact: Contact) {

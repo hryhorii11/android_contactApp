@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.presentation.utils.ext.setPhoto
 import com.example.myapplication.databinding.FragmentDetailBinding
@@ -25,16 +26,16 @@ class DetailViewFragment : Fragment() {
         sharedElementEnterTransition = TransitionInflater.from(requireContext())
             .inflateTransition(android.R.transition.slide_left)
         binding = FragmentDetailBinding.inflate(layoutInflater)
-        setData()
+        initializeContactPersonalData()
         setListeners()
         return binding.root
     }
 
     private fun setListeners() {
-        binding.buttonBack.setOnClickListener { close() }
+        binding.buttonBack.setOnClickListener { closeScreen() }
     }
 
-    private fun setData() {
+    private fun initializeContactPersonalData() {
         with(binding)
         {
             textViewName.text = args.contact.name
@@ -42,12 +43,12 @@ class DetailViewFragment : Fragment() {
             textViewAddres.text = args.contact.address
             if (args.contact.photo != null)
                 imageViewContactPhoto.setPhoto(args.contact.photo!!)
+            else imageViewContactPhoto.setPhoto()
         }
     }
 
-    private fun close() {
-        val fragmentManager = requireActivity().supportFragmentManager
-        fragmentManager.popBackStack()
+    private fun closeScreen() {
+        findNavController().popBackStack()
     }
 
 }

@@ -11,23 +11,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.example.myapplication.data.model.EditBody
+import com.example.myapplication.R
+import com.example.myapplication.domain.model.EditBody
 import com.example.myapplication.databinding.FragmentSignUpExtendedBinding
+import com.example.myapplication.presentation.ui.BaseFragment
 import com.example.myapplication.presentation.ui.main.activity.MainActivity
-import com.example.myapplication.presentation.utils.Constants.SUCCESS_CODE
 import com.example.myapplication.presentation.utils.ext.setPhoto
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpExtendedFragment : Fragment() {
+class SignUpExtendedFragment :
+    BaseFragment<SignUpExtendedViewModel>(R.layout.fragment_sign_up_extended) {
     private var imageUri: Uri? = null
-    private val viewModel: SignUpExtendedViewModel by viewModels()
+    override val viewModel: SignUpExtendedViewModel by viewModels()
     private lateinit var photoActivityResult: ActivityResultLauncher<Intent>
     val binding by lazy { FragmentSignUpExtendedBinding.inflate(layoutInflater) }
-    private val args: SignUpExtendedFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,19 +42,19 @@ class SignUpExtendedFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel._registerResponse.observe(viewLifecycleOwner) {
-            if (it.code == SUCCESS_CODE) {
+
+        viewModel.user.collectUIState(
+            onError = {
+                Toast.makeText(this.context, "it", Toast.LENGTH_LONG).show()
+
+            },
+            onSuccess = {
                 val intent = Intent(requireActivity(), MainActivity::class.java)
-                intent.putExtra("token", args.response.accessToken)
-                intent.putExtra("token", args.response.accessToken)
-                intent.putExtra("user", it.data.user)
                 startActivity(intent)
                 requireActivity().finish()
             }
-        }
-        viewModel._errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(this.context, it, Toast.LENGTH_LONG).show()
-        }
+        )
+
     }
 
     private fun setListeners() {
@@ -91,7 +92,7 @@ class SignUpExtendedFragment : Fragment() {
             binding.edittextUserName.text.toString(),
             binding.edittextPhone.text.toString()
         )
-        viewModel.editUser(requestBody, args.response.accessToken, args.response.user.id)
+        viewModel.editUser(requestBody )
 
     }
 

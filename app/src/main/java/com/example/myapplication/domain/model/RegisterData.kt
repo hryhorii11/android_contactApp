@@ -1,14 +1,24 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+
+data class Response<T>(
+    val status: String,
+    val code: Int,
+    val message: String,
+    val data: T
+)
+
 @Parcelize
-data class CreateResponse(
+data class RegisterData(
     val user: UserFromLogin,
     val accessToken: String,
     val refreshToken: String
-) : Parcelable
+) : Parcelable {
+
+}
 
 @Parcelize
 data class CreateUserResponseData(
@@ -25,12 +35,7 @@ data class CreateUserResponseData(
     val id: Int? = null
 ) : Parcelable
 
-data class UserRegisterResponse(
-    val status: String,
-    val code: Int,
-    val message: String,
-    val data: CreateResponse
-)
+
 
 data class LoginData(
     val email: String,

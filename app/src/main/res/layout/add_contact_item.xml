@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/contactImageStartMargin"
                 android:layout_marginTop="@dimen/imageViewContactTopMargin"
-                android:src="@drawable/baseline_person_2_24"
+                android:src="@drawable/standard_contact_image"
                 android:transitionName="sharedImageFromRecycler"
                 app:layout_constraintStart_toEndOf="@id/checkboxMultiSelect"
                 app:layout_constraintTop_toTopOf="parent" />

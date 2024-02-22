@@ -5,11 +5,11 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 
 
-fun ImageView.setPhoto(photo:String= R.drawable.baseline_person_2_24.toString())
+fun ImageView.setPhoto(photo:String= R.drawable.standard_contact_image.toString())
 {
     Glide.with(this)
         .load(photo)
         .circleCrop()
-        .placeholder(R.drawable.baseline_person_2_24)
+        .placeholder(R.drawable.standard_contact_image)
         .into(this)
 }
