@@ -1,75 +1,59 @@
 package com.example.myapplication.presentation.ui.main.fragments.addContact
 
-import com.example.myapplication.data.model.AddContactBody
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.model.Contact
-import com.example.myapplication.data.retrofit.UserRemoteData
+import com.example.myapplication.data.contacts.repository.ContactsRepository
+import com.example.myapplication.domain.model.AddContactBody
+import com.example.myapplication.domain.model.Contact
+import com.example.myapplication.domain.UIState
+import com.example.myapplication.presentation.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class AddContactViewModel @Inject constructor(private val userRemoteData: UserRemoteData): ViewModel() {
-    private val _contacts = MutableLiveData<List<Contact>>()
-    var contacts: LiveData<List<Contact>> = _contacts
-    private lateinit var originalList: MutableList<Contact>
-    val loading = MutableLiveData<Boolean>()
-    private val errorMessage = MutableLiveData<String>()
+class AddContactViewModel @Inject constructor(private val contactsRepository: ContactsRepository) :
+    BaseViewModel() {
+    private val _contacts = MutableUIStateFlow<List<Contact>>()
+    val contacts = _contacts.asStateFlow()
+    private val originalList: MutableStateFlow<List<Contact>> = MutableStateFlow(emptyList())
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        onError("Exception handled: ${throwable.localizedMessage}")
+
+    fun setContacts() {
+        contactsRepository.getContactsToAdd()
+            .collectRequest(_contacts, originalList) { it.toUi() }
     }
 
-    fun setContacts(token: String, userId: Int) {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val responseAllContacts = userRemoteData.getAllUsers("Bearer $token")
-            val responseUserContacts = userRemoteData.getUserContacts("Bearer $token", userId)
-            withContext(Dispatchers.Main) {
-                _contacts.value = responseAllContacts.data.users?.filter {
-                    !responseUserContacts.data.contacts?.contains(it)!!
-                }?.map { it.toContact() }
-                if (_contacts.value != null)
-                    originalList = _contacts.value?.toMutableList()!!
-            }
-        }
-    }
-
-    fun addContact(token: String, contactId: Int, userId: Int) {
-        loading.value = true
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            userRemoteData.addContact("Bearer $token", userId, AddContactBody(contactId))
-            withContext(Dispatchers.Main) {
-                _contacts.value = contacts.value?.map {
-                    if (it.id == contactId) {
-                        it.copy(isChecked = !it.isChecked)
-                    } else {
-                        it
+    fun addContact(contactId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _contacts.value = UIState.Loading()
+            contactsRepository.addContact(AddContactBody(contactId))
+                .collect {
+                    if (it.isFailure) _contacts.value =
+                        UIState.Error(it.exceptionOrNull()?.message ?: "Unknown error")
+                    if (it.isSuccess) {
+                        originalList.value = (originalList.value.map { contact ->
+                            if (contact.id == contactId)
+                                contact.copy(isChecked = !contact.isChecked)
+                            else contact
+                        })
+                        _contacts.value = UIState.Success(originalList.value)
                     }
                 }
-                loading.value = false
-            }
         }
+
     }
 
     fun search(name: String) {
         _contacts.value =
-            originalList.filter {
+            UIState.Success(originalList.value.filter {
                 if (it.name == null) false
                 else it.name.lowercase().contains(name.lowercase())
-            }
-        if (name == "") _contacts.value = originalList
-    }
-
-    private fun onError(message: String) {
-        viewModelScope.launch {
-            Dispatchers.Main
-            errorMessage.value = message
-        }
+            })
+        if (name == "") _contacts.value = UIState.Success(originalList.value)
     }
 }
+

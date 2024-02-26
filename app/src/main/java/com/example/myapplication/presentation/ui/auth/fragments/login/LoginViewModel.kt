@@ -1,44 +1,83 @@
 package com.example.myapplication.presentation.ui.auth.fragments.login
 
-
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.model.LoginData
-import com.example.myapplication.data.model.UserRegisterResponse
-import com.example.myapplication.data.retrofit.UserRemoteData
+import com.example.myapplication.data.datastore.DataStorePreferences
+import com.example.myapplication.data.users.repository.UsersRepository
+import com.example.myapplication.domain.model.LoginData
+import com.example.myapplication.domain.model.RefreshTokenResponse
+import com.example.myapplication.domain.model.RegisterData
+import com.example.myapplication.domain.model.Response
+import com.example.myapplication.presentation.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 
-class LoginViewModel @Inject constructor(private val userRemoteData: UserRemoteData) : ViewModel() {
-    private val loginResponse = MutableLiveData<UserRegisterResponse>()
-    val _loginResponse: LiveData<UserRegisterResponse> = loginResponse
-    private val errorMessage = MutableLiveData<String>()
-    val _errorMessage: LiveData<String> = errorMessage
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        onError("Exception handled: ${throwable.localizedMessage}")
+class LoginViewModel @Inject constructor(
+    private val usersRepository: UsersRepository,
+    private val dataStore: DataStorePreferences
+) :
+    BaseViewModel() {
+
+    private val _user = MutableUIStateFlow<Response<RegisterData>>()
+    val user = _user
+
+    private val _tokens = MutableUIStateFlow<Response<RefreshTokenResponse>>()
+    val tokens = _tokens
+
+    private val _loginData = MutableLiveData<LoginData>()
+    val loginData = _loginData
+
+    private val _isAuthorized=MutableLiveData<Boolean>()
+     val isAuthorized=_isAuthorized
+
+
+
+    fun refreshToken( ) {
+        usersRepository.refreshToken().collectRequest(_tokens)
     }
 
     fun login(loginData: LoginData) {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val response = userRemoteData.login(loginData)
-            withContext(Dispatchers.Main) {
-                loginResponse.value = response
+        usersRepository.login(loginData).collectRequest(_user)
+    }
+
+    fun getLoginData() {
+        viewModelScope.launch {
+            loginData.value = dataStore.getLoginData()
+        }
+    }
+
+    fun rememberLoginData(loginData: LoginData, checked: Boolean) {
+        if (checked) {
+            viewModelScope.launch {
+                dataStore.rememberUser(loginData)
             }
-
         }
     }
 
-    private fun onError(message: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            errorMessage.value = message
+    fun saveUserData(data: RegisterData) {
+        viewModelScope.launch {
+            dataStore.saveUserIdTokens(data.user.id, data.accessToken, data.refreshToken)
         }
     }
+
+    fun saveNewToken(tokens: RefreshTokenResponse) {
+        viewModelScope.launch {
+            dataStore.saveNewTokens(tokens.accessToken, tokens.refreshToken)
+        }
+    }
+
+    fun setAuthorizedState(isAuthorize: Boolean) {
+        viewModelScope.launch { dataStore.setAuthorizeState(isAuthorize) }
+    }
+
+    fun getAuthorizeState() {
+        viewModelScope.launch {
+          _isAuthorized.value=  dataStore.getAuthorizeState()
+        }
+    }
+
+
 }

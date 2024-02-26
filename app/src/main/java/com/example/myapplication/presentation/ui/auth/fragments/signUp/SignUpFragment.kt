@@ -9,26 +9,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.myapplication.R
-import com.example.myapplication.data.model.User
 import com.example.myapplication.databinding.FragmentSignUpBinding
-import com.example.myapplication.presentation.utils.Constants.SUCCESS_CODE
+import com.example.myapplication.domain.model.User
+import com.example.myapplication.presentation.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-const val emailKey = "email"
-const val passwordKey = "password"
+
 @AndroidEntryPoint
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment<SignUpViewModel>(R.layout.fragment_sign_up) {
     private val binding by lazy { FragmentSignUpBinding.inflate(layoutInflater) }
-    private val viewModel:SignUpViewModel by  viewModels()
-
+    override val viewModel: SignUpViewModel by viewModels()
     private val passwordLength = 8
-
     private val preferences: SharedPreferences by lazy {
         requireActivity().getSharedPreferences("signUpPreferences", AppCompatActivity.MODE_PRIVATE)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,20 +40,22 @@ class SignUpFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel._registerResponse.observe(viewLifecycleOwner){
-            if(it.code==SUCCESS_CODE) {
+        viewModel.user.collectUIState(
+            onError = {
+                Toast.makeText(
+                    this.context,
+                    getString(R.string.email_is_already_registered), Toast.LENGTH_SHORT
+                ).show()
+            },
+            onSuccess = {
+                viewModel.setAuthorizeState()
                 Navigation.findNavController(requireView())
                     .navigate(
                         SignUpFragmentDirections.actionSignInFragment2ToSignInExtendedFragment2(
-                            it.data
                         )
                     )
             }
-        }
-        viewModel._errorMessage.observe(viewLifecycleOwner){
-            Toast.makeText(this.context,
-                getString(R.string.email_is_already_registered),Toast.LENGTH_SHORT).show()
-        }
+        )
     }
 
 
@@ -81,12 +80,11 @@ class SignUpFragment : Fragment() {
         }
     }
 
-        private fun loadData() {
-        binding.edittextEmail.setText(preferences.getString(emailKey, ""))
-        binding.edittextPassword.setText(preferences.getString(passwordKey, ""))
+    private fun loadData() {
+        binding.edittextEmail.setText(preferences.getString(EMAIL_KEY, ""))
+        binding.edittextPassword.setText(preferences.getString(PASSWORD_KEY, ""))
 
     }
-
 
 
     private fun setFieldsValidations() {
@@ -108,14 +106,13 @@ class SignUpFragment : Fragment() {
     }
 
 
-
     private fun saveDataToSP() {
         preferences.edit().putString(
-            passwordKey,
+            PASSWORD_KEY,
             binding.edittextPassword.text.toString()
         )
             .putString(
-                emailKey,
+                EMAIL_KEY,
                 binding.edittextEmail.text.toString()
             )
             .apply()
@@ -135,4 +132,8 @@ class SignUpFragment : Fragment() {
         return email.matches(emailPattern.toRegex())
     }
 
+    companion object {
+        const val EMAIL_KEY = "email"
+        const val PASSWORD_KEY = "password"
+    }
 }

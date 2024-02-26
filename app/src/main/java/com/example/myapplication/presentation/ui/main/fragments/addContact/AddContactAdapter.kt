@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.model.Contact
+import com.example.myapplication.domain.model.Contact
 import com.example.myapplication.databinding.AddContactItemBinding
 import com.example.myapplication.presentation.ui.main.fragments.contactList.util.ItemCallback
 import com.example.myapplication.presentation.utils.ext.setPhoto
